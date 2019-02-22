@@ -1,0 +1,507 @@
+/*
+=============================================================
+| VARIABLES
+=============================================================
+*/
+
+$COLOR-AQUA-ISLAND: #A7D4DD; $COLOR-BLACK: #000000;
+$COLOR-BLACK-SQUEEZE: #EBF5F7;
+$COLOR-CBRAIN: #05A3D6;
+$COLOR-HUMMING-BIRD : #CDEDF7;;
+$COLOR-MODAL-BACKGROUND: rgba(0, 44, 71, 0.55);
+$COLOR-PRUSSIAN: #002C47;
+$COLOR-WHITE: #FFFFFF;
+$COLOR-WILD-SAND: #F5F5F5;
+
+$MARGIN: 1;
+$PADDING: 0.625;
+
+$NAV-HEIGHT: 3.75;
+
+$MODAL-WIDTH: 45;
+$MODAL-HEIGHT: 30;
+
+.background-black-squeeze {
+  background-color: $COLOR-BLACK-SQUEEZE;
+}
+
+/*
+=============================================================
+| BREAKPOINTS
+=============================================================
+*/
+
+@mixin breakpoint($breakpoint) {
+  @if $breakpoint == mobile {
+    @media only screen and (max-width: 640px) { 
+      @content;
+    } 
+  }
+  @else if $breakpoint == tablet {
+    @media only screen and (min-width: 0px) and (max-width: 900px) {
+      @content;
+    }
+  }
+  @else if $breakpoint == desktop {
+    @media only screen and (min-width: 900px) and (max-width:1200px) {
+      @content;
+    }
+
+  }
+  @else if $breakpoint == desktop_large {
+    @media only screen and (min-width: 1200px) {
+      @content;
+    }
+  }
+  @else if $breakpoint == desktop_xlarge {
+    @media only screen and (min-width: 1600px) {
+      @content;
+    }
+  }
+}
+
+/*
+=============================================================
+| FONTS
+=============================================================
+*/
+
+.text {
+  font-family: 'Roboto', sans-serif;
+  color: $COLOR-PRUSSIAN;
+  font-size: 1rem ;
+  line-height: 1.5rem;
+  font-weight: 300;
+}
+
+.text-title {
+  @extend .text;
+  font-size: 3rem;
+  font-weight: 600;
+  color: $COLOR-WHITE;
+  line-height: 5rem;
+}
+
+.text-heading {
+  @extend .text;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 500;
+}
+
+.text-subtitle {
+  @extend .text;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 2rem;
+}
+
+.text-banner {
+  @extend .text;
+  font-size: 1.1rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+}
+
+.text-nav {
+  @extend .text;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: rgba(255,255,255, 0.6);
+  font-size: 1rem;
+}
+
+.text-button {
+  @extend .text;
+  text-transform: uppercase;
+  font-weight: 600;
+  line-height: unset;
+  color: $COLOR-WHITE;
+  text-decoration:none;
+  z-index:1;
+}
+
+/*
+=============================================================
+| BUTTONS
+=============================================================
+*/
+
+@mixin button {
+  @extend .text-button;
+  width: fit-content;
+  padding:$PADDING / 2 + rem $PADDING * 2 + rem;
+  position:relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  box-shadow:0px 2px 10px rgba(0,0,0,0.16), 0px 3px 6px rgba(0,0,0,0.1);
+  letter-spacing: 0.6px;
+  &:before {
+    content: '';
+    position:absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    right:100%;
+    opacity:1;
+    z-index:-1;
+    transition: 0.5s all ease;
+  }
+  &:hover {
+    transition: 0.3s all ease;
+    &:before {
+      left:0;
+      right:0;
+      opacity:1;
+    }
+  }
+}
+@mixin button-default (
+  $font01: $COLOR-WHITE, 
+  $font02: $COLOR-WHITE, 
+  $fill01: $COLOR-PRUSSIAN, 
+  $fill02: $COLOR-CBRAIN, 
+  $border: none,
+  ){
+  @include button;
+  color: $font01;
+  background-color: $fill01;
+  border: 2px solid $border;
+  &:before {
+    background-color: $fill02;
+  }
+  &:hover {
+    color: $font02;
+    transition: 0.3s color ease;
+  }
+}
+
+.button-filled {
+  @include button-default;
+}
+
+.button-outlined {
+  @include button-default($COLOR-PRUSSIAN,$COLOR-WHITE, transparent, $COLOR-PRUSSIAN, $COLOR-PRUSSIAN);
+}
+
+/*
+=============================================================
+| CARDS
+=============================================================
+*/
+
+.bar-empty {
+  height: 0.25rem;
+  background-color: $COLOR-PRUSSIAN;
+  border-radius: 3px;
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  bottom: 0;
+  transition: 0.2s all ease;
+}
+
+.bar-filled {
+  left: 0;
+  right: 0;
+  transition: 0.2s all ease;
+}
+
+.cards-section {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  justify-content: space-between;
+  margin: 2rem;
+  .card-wrapper {
+    flex: 0 1 50%;
+    padding: $MARGIN * 2 + rem;
+    transition: padding-bottom 0.5s ease;
+    .card {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.2);
+      border-radius: 3px;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s ease;
+      .card-img {
+        flex: 1 1 100%;
+        display: flex;
+        justify-content: center;
+        padding: 1rem 2rem;
+      }
+      .card-text {
+        flex: 1 1 100%;
+        display:flex;
+        justify-content: center;
+        padding: 1rem 0;
+      }
+      .card-bottom {
+        @extend .bar-empty;
+      }
+      &:hover {
+        box-shadow: 0px 2px 8px 2px rgba(0, 0, 0, 0.2);
+        transition: all 0.2s linear;
+        .card-bottom {
+          @extend .bar-filled;
+        }
+      }
+    }
+  }
+}
+
+/*
+=============================================================
+| BODY
+=============================================================
+*/
+
+* {
+  @extend .text;
+  margin: 0px;
+  box-sizing: border-box;
+  font-size: 16px;
+  @include breakpoint(tablet) {
+    font-size: 20px;
+  }
+}
+
+body {
+  height: 100vh;
+  padding-top: $NAV-HEIGHT + rem;
+  display: flex;
+  flex-wrap: wrap
+}
+
+
+/*
+=============================================================
+| NAVIGATION BAR
+=============================================================
+*/
+
+.nav {
+  height: $NAV-HEIGHT + rem;
+  width: 100%;
+  background-color: $COLOR-PRUSSIAN;
+  position: fixed;
+  top:0;
+  left:0;
+  box-shadow: 0 8px 6px -6px #81acb9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  z-index: 10;
+  .logo {
+    width: 10rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(to right, $COLOR-CBRAIN, #026085);
+    text-decoration: none;
+    .logo-img{
+      width: 100%;
+      padding: $PADDING * 2 + rem;
+    }
+  }
+  .bar {
+    align-self: flex-end;
+    display: flex;
+    height: 100%;
+    .login {
+      @extend .button-outlined,.text-nav;
+      border:none;
+      border-left: 2px solid $COLOR-CBRAIN;
+      padding: $PADDING + rem $PADDING * 5 + rem;
+      color:rgba(255,255,255,0.6);
+      font-weight: 300;
+      &:before {
+        background-color: $COLOR-CBRAIN;
+      }
+      &:hover {
+        color: $COLOR-WHITE
+      }
+    }
+    .links {
+      display:flex;
+      .link {
+        @extend .text-nav;
+        text-decoration: none;
+        padding: $PADDING * 2 + rem;
+        border-bottom: 2px solid transparent;
+        &:hover, &[data-selected] {
+          color: $COLOR_WHITE;
+          transition:  all 0.2s ease-in-out;
+        }
+      }
+     }
+    .burger {
+      width: fit-content;
+      display: none;
+      .burger-img {
+        height:100%;
+        padding:$PADDING * 2 + rem 0;
+        pointer-events:none;
+      }
+     }
+  }
+  @include breakpoint(tablet) {
+    .bar {
+      width:calc(100% - 10rem);
+      flex-direction: column;
+      flex-wrap:wrap;
+      .links {
+        display:none;
+      }
+      .login {
+        height: 100%;
+      }
+      .burger {
+        display: block;
+        align-self: flex-end;
+        padding-right: 2rem;
+        opacity: 0.6;
+        height: 100%;
+        cursor: pointer;
+        &:hover {
+          opacity: 1;
+          transition:  all 0.3s ease-in-out;
+        }
+      }
+    }
+   &[data-open="true"] {
+     .bar {
+       .links {
+         display:flex;
+         flex-direction: column;
+         background-color: $COLOR-PRUSSIAN;
+         opacity:0.95;
+         position: absolute;
+         top: $NAV-HEIGHT + rem;
+         right: 0;
+         width: 100%;
+         z-index:5;
+         .link {
+           width: 100%;
+           text-align:center;
+           &:hover {
+             background-color: $COLOR-CBRAIN;
+           }
+         }
+       }
+     }
+    }
+  }
+
+  @include breakpoint(mobile) {
+    .bar {
+      .login {
+        padding:$PADDING / 2 + rem $PADDING * 2 + rem;
+      }
+    }
+  }
+  
+}
+
+/*
+=============================================================
+| FOOTER
+=============================================================
+*/
+
+.partnership {
+  @extend .text-subtitle;
+  align-self: flex-end;
+  width: 100%;
+  background-color: $COLOR-WILD-SAND;
+  text-transform: uppercase;
+  padding: $MARGIN * 2 + rem;
+  margin-top: 3rem;
+  .partnership-text {
+    width: 100%;
+  }
+  .partnership-icons {
+    width: 100%;
+    margin: $MARGIN * 2 + rem 0px;
+    .partnership-icon {
+      width: 6.25rem;
+      margin: 0px $MARGIN + rem;
+    }
+  }
+  @include breakpoint(tablet) {
+    .partnership-text {
+      text-align: center;
+    }
+    .partnership-icons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      .partnership-icon {
+        width: none;
+        height: none;
+        margin: 1rem 1rem;
+      }
+    }
+  }
+}
+
+/*
+=============================================================
+| ANIMATIONS - INTERACTIONS
+=============================================================
+*/
+
+.circle-spin {
+  padding: 0;
+  border: 4px solid transparent;
+  border-radius: 50%;
+  box-shadow: none;
+  position: relative;
+  &::before,
+  &::after {
+    box-sizing: inherit;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+  }
+  &::before {
+    border: 4px solid transparent;
+    transition:
+      border-top-color 0.15s linear 0.1s,
+      border-left-color 0.15s linear 0.2s,
+      border-bottom-color 0.15s linear 0.3s;
+  }
+}
+
+.circle-spin-hover {
+  &::before {
+    border-top-color: $COLOR-CBRAIN;
+    border-left-color: $COLOR-CBRAIN;
+    border-bottom-color: $COLOR-CBRAIN;
+    border-right-color: $COLOR-CBRAIN;
+    transition: 
+      border-bottom-color 0.15s linear,
+      border-left-color 0.15s linear 0.1s,
+      border-top-color 0.15s linear 0.2s,
+      border-right-color 0.15s linear 0.3s;
+  }
+  &::after {
+    border-bottom: 4px solid $COLOR-CBRAIN;
+    border-left: 4px solid $COLOR-CBRAIN;
+    border-right: 4px solid $COLOR-CBRAIN;
+    transform: rotate(270deg);
+    transition: transform 0.4s linear 0s;
+  }
+}

@@ -1,0 +1,173 @@
+@import '../base';
+
+/*
+=============================================================
+| HOME
+=============================================================
+*/
+
+.home {
+  .banner {
+    background-color: $COLOR-AQUA-ISLAND;
+    display: flex;
+    padding: $PADDING * 3.5 + rem 0;
+    .banner-content {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      padding: 2rem 0;
+      .banner-description {
+        flex: 1 1 45%;
+        padding: $PADDING * 3.5 + rem $PADDING * 6.5 + rem;
+        padding-right: $PADDING * 10 + rem;
+        z-index: 2;
+        background-image: linear-gradient(to right, #A7D4DD 90%, rgba(167, 212, 221,0.1));
+        .banner-description-heading {
+          @extend .text-title;
+        }
+        .banner-description-img {
+          width: 15rem;
+        }
+        .banner-description-paragraph {
+          @extend .text-banner;
+          color: $COLOR-WHITE;
+        }
+        .banner-description-button {
+          @extend .button-filled;
+          padding: $PADDING + rem $PADDING * 2 + rem;
+          margin-top: $MARGIN * 2 + rem;
+          a {
+            @extend .text-button
+          }
+        }
+      }
+      .banner-img {
+        flex: 0 0 45%;
+        position:relative;
+        height: 100%;
+        .banner-img-pipelines {
+          position: absolute;
+          right: 0;
+          height: 100%;
+        }
+        
+      }
+    }
+  }
+  .icons {
+    margin: 0 $MARGIN * 2 + rem;
+    display: flex;
+    .icon {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content:center;
+      padding: 0 $PADDING * 3 + rem;
+      margin: 2rem auto;
+      .icon-text {
+        @extend .text;
+        text-align: center;
+        width: 100%;
+        .icon-text-heading {
+          @extend .text-subtitle;
+        }
+      }
+      .efficiency {
+        width: 200px;
+        height: 200px;
+      }
+    }
+  }
+  .learn-more {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: $MARGIN * 3 + rem auto;
+  }
+  @include breakpoint(desktop_large) {
+    .banner {
+      .banner-content {
+        padding: 0;
+        .banner-description {
+          padding: 6rem 5%;
+          display: flex;
+          flex-wrap: wrap;
+          flex: 1 1 45%;
+          .banner-description-heading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          .banner-description-paragraph {
+            margin: $MARGIN * 2 + rem 0;
+            margin-right: $MARGIN * 4 + rem;
+          }
+        }
+        .banner-img {
+          .banner-img-pipelines {
+            padding: 2rem 0;
+          }
+        }
+      }
+    }
+  }
+  @include breakpoint(tablet) {
+    .banner {
+      padding: 0;
+      width: 100%;
+      .banner-content {
+        width: 100%;
+        margin-top: 0;
+        flex-direction: column-reverse;
+        justify-content: space-around;
+        overflow: hidden;
+        padding: 0;
+        .banner-description {
+          flex: unset;
+          padding: 0 2rem;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content:center;
+          text-align: center;
+          .banner-description-img {
+            width: auto;
+          }
+          .banner-description-button {
+            align-self: center;
+          }
+        }
+        .banner-img {
+          height: 50%;
+          .banner-img-gradient {
+            display:none;
+          }
+          .banner-img-pipelines {
+            position: unset;
+            padding: 0;
+            padding-top: 1rem;
+          }
+        }
+      }
+    }
+    .icons {
+      flex-wrap: wrap;
+      margin: 0;
+    }
+  }
+  @include breakpoint(mobile) {
+    .banner {
+      .banner-content {
+        margin: 2rem 0;
+        .banner-description {
+          margin: 0;
+          background-image:none;
+        }
+        .banner-img {
+          display: none;
+        }
+      }
+    }
+  }
+}
+

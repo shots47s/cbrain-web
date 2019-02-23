@@ -7,6 +7,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 module.exports = {
   entry: {
     index: "./src/index/index.js",
+    about: "./src/about/about.js",
   },
   output: {
     filename: "js/[name].[hash].bundle.js",
@@ -60,6 +61,12 @@ module.exports = {
       template: "src/index/index.html",
       chunks: ["index"],
     }),
+    new HtmlWebpackPlugin({
+      filename: "about.html",
+      template: "src/about/about.html",
+      chunks: ["about"],
+    }),
+
     new CopyWebpackPlugin([{ from: "src/assets", to: "assets" }]),
   ],
 };

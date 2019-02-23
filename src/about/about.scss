@@ -1,0 +1,766 @@
+@import "../base";
+
+///*
+//=============================================================
+//| ABOUT - CONTACT SECTION
+//=============================================================
+//*/
+//
+//.about {
+//  .about-contact {
+//    display: flex;
+//    padding: 6rem 0px;
+//    margin: 4rem 0;
+//    position: relative;
+//    flex-wrap: wrap;
+//    .contact-heading {
+//      width: 100%;
+//      .contact-heading-text {
+//        @extend .text-heading;
+//        width: 50%;
+//        margin: 1rem 0rem;
+//        padding: 0rem 2rem;
+//        text-align: center;
+//      }
+//    }
+//    .contact-information {
+//      background-color: $COLOR-BLACK-SQUEEZE;
+//      flex: 1 1 50%;
+//      display: flex;
+//      align-items: center;
+//      justify-content: center;
+//      padding: 2rem;
+//      .contact-information-text {
+//        font-weight: 300;
+//        line-height: 1.75rem;
+//        padding-left: 4rem;
+//      }
+//      .contact-information-border {
+//        background-color: $COLOR-PRUSSIAN;
+//        height: 1px;
+//        width: 12.5rem;
+//        margin: 1rem 0px;
+//      }
+//    }
+//    .contact-img-wrapper {
+//      flex: 1 1 50%;
+//      display: flex;
+//      justify-content: center;
+//      align-items: center;
+//      background: $COLOR-BLACK-SQUEEZE;
+//      .contact-img {
+//        height: 100%;
+//        border-radius: 2px;
+//        position: absolute;
+//        align-self: center;
+//      }
+//    }
+//  }
+//  @include breakpoint(tablet) {
+//    .about-contact {
+//      flex-wrap: nowrap;
+//      .contact-heading {
+//        position: absolute;
+//        top: 0;
+//        width: 50%;
+//        .contact-heading-text {
+//          text-align: unset;
+//        }
+//      }
+//      .contact-information {
+//        .contact-information-text {
+//          padding-left: 0rem;
+//        }
+//      }
+//      .contact-img-wrapper {
+//        .contact-img {
+//          height: 75%;
+//        }
+//      }
+//    }
+//  }
+//  @include breakpoint(mobile) {
+//    .about-contact {
+//      flex-wrap: wrap;
+//      text-align: center;
+//      padding: 0;
+//      .contact-heading {
+//        width: 100%;
+//        position: unset;
+//        .contact-heading-text {
+//          width: 100%;
+//        }
+//      }
+//      .contact-information {
+//        padding: 1rem;
+//        flex: 1 1 100%;
+//      }
+//      .contact-img-wrapper {
+//        flex: 1 1 100%;
+//        .contact-img {
+//          width: 50%;
+//          padding-bottom: 2rem;
+//          position: unset;
+//          height: auto;
+//        }
+//      }
+//    }
+//  }
+//}
+//
+///*
+//=============================================================
+//| ABOUT - GRID SECTION
+//=============================================================
+//*/
+//
+//.about {
+//  .about-team {
+//    .team-heading {
+//      @extend .text-heading;
+//      text-align: center;
+//      padding: 2rem 0;
+//      .team-description {
+//        @extend .text;
+//        padding: 1rem 0;
+//      }
+//    }
+//    .team-grid {
+//      display: flex;
+//      flex-wrap: wrap;
+//      justify-content: center;
+//      padding: 2rem 0;
+//      .team-employee {
+//        flex: 0 1 25rem;
+//        padding: 1rem;
+//        text-align: center;
+//        &[data-modal="false"] {
+//          .employee-details:hover {
+//            .employee-img-wrapper .employee-img-border {
+//              @extend .circle-spin-hover;
+//              .employee-icon {
+//                &:before {
+//                  right: 0;
+//                  opacity: 1;
+//                  transform: translate(0%,0)
+//                }
+//              }
+//            }
+//            .employee-description .employee-information .employee-border {
+//              &:before {
+//                transition: 0.4s all ease;
+//                left: 0%;
+//                right: 0%;
+//                height: 2px;
+//              }
+//            }
+//          }
+//        }
+//        .employee-details {
+//          display: flex;
+//          justify-content: center;
+//          flex-wrap: wrap;
+//          margin: 1rem;
+//          cursor: pointer;
+//          .employee-img-wrapper {
+//            width: 45%;
+//            position: relative;
+//            &:after {
+//              content: "";
+//              display: block;
+//              padding-bottom: 100%;
+//            }
+//            .employee-img-border {
+//              @extend .circle-spin;
+//              display: flex;
+//              padding: 0.5rem;
+//              width: 100%;
+//              height: 100%;
+//              position: absolute;
+//              .employee-img {
+//                width: 100%;
+//                position: relative;
+//                overflow: hidden;
+//                border-radius: 50%;
+//                background-size: cover;
+//              }
+//              .employee-icon {
+//                @extend .button-filled;
+//                width: 2rem;
+//                height: 2rem;
+//                padding: 0;
+//                font-size: 1.5rem;
+//                font-weight: 300;
+//                box-shadow: 1px 1px 8px -3px  $COLOR-CBRAIN;
+//                position: absolute;
+//                right: 0.5rem;
+//                bottom: 0.5rem;
+//                border-radius: 50%;
+//                z-index: 1;
+//                &:before {
+//                  content: "";
+//                  border-radius: 50%;
+//                  position: absolute;
+//                  top: 0;
+//                  left: 0%;
+//                  bottom: 0;
+//                  right: 100%;
+//                  opacity: 0;
+//                  transition: 0.3s all linear;
+//                }
+//              }
+//            }
+//          }
+//          .employee-description {
+//            .employee-information {
+//              margin: 1rem 0;
+//              display: flex;
+//              flex-wrap: wrap;
+//              justify-content: center;
+//              .employee-name {
+//                @extend .text-subtitle;
+//                width: 100%;
+//              }
+//              .employee-border {
+//                background-color: $COLOR-PRUSSIAN;
+//                height: 1px;
+//                width: 12.5rem;
+//                margin: 1rem 0px;
+//                position: relative;
+//                transition: 0.3s all ease;
+//                &::before {
+//                  background: $COLOR-CBRAIN;
+//                  position: absolute;
+//                  content: "";
+//                  top: 0;
+//                  bottom: 0;
+//                  left: 50%;
+//                  right: 50%;
+//                }
+//              }
+//              .employee-occupation {
+//                width: 100%;
+//              }
+//            }
+//            .employee-bio {
+//              display: none;
+//            }
+//          }
+//        }
+//      }
+//    }
+//  }
+//  @include breakpoint(tablet) {
+//    .about-team {
+//      .team-grid {
+//        .team-employee {
+//          flex: 0 1 45%;
+//        }
+//      }
+//    }
+//  }
+//  @include breakpoint(mobile) {
+//    .about-team {
+//      .team-heading {
+//        padding: 0;
+//      }
+//      .team-grid {
+//        padding: 2rem;
+//        .team-employee {
+//          flex: 0 1 100%;
+//        }
+//      }
+//    }
+//  }
+//}
+//
+///*
+//=============================================================
+//| ABOUT - MODAL
+//=============================================================
+//*/
+//
+//.about {
+//  .about-team {
+//    .team-grid {
+//      .modal-background[data-modal="true"]{
+//        display: flex;
+//        background-color: $COLOR-MODAL-BACKGROUND;
+//        width: 100%;
+//        height: 100%;
+//        position: fixed;
+//        top: 0;
+//        left: 0;
+//        z-index: 2;
+//        cursor: pointer;
+//      }
+//      .modal-container[data-modal="true"] {
+//        height: $MODAL-HEIGHT + rem;
+//        width: $MODAL-WIDTH + rem;
+//        position: fixed;
+//        z-index: 10;
+//        top: 25%;
+//        display: flex;
+//        box-shadow: 0px 0px 30px -1px $COLOR-MODAL-BACKGROUND;
+//        background-color: $COLOR-WHITE;
+//        .team-employee[data-modal="true"] {
+//          width: 100%;
+//          height: 100%;
+//          text-align: left;
+//          flex: none;
+//          padding: 2rem;
+//          .employee-details {
+//            width: 100%;
+//            height: 100%;
+//            margin: 0rem;
+//            flex-wrap: nowrap;
+//           .employee-img-wrapper {
+//              width: 20%;
+//              align-items: flex-start;
+//              position: unset;
+//             .employee-img-border {
+//                position: unset;
+//                width: 8rem;
+//                height: 8rem;
+//                border: 0;
+//                &::before,
+//                &::after {
+//                  content: unset;
+//                  border: 0;
+//                }
+//               .employee-icon {
+//                  top: 0;
+//                  right: 0;
+//                  transform: translate(50%, -50%) rotate(45deg);
+//                  cursor: pointer;
+//                }
+//              }
+//            }
+//            .employee-description {
+//              height: 100%;
+//              padding: 0 $MARGIN * 2 + rem;
+//              display:flex;
+//              flex-wrap: wrap;
+//              justify-content:center;
+//              ::-webkit-scrollbar {
+//                -webkit-appearance: none;
+//                width: 7px;
+//                border-radius: 50px;
+//              }
+//              ::-webkit-scrollbar-thumb {
+//                border-radius: 4px;
+//                -webkit-box-shadow: inset 0 0 10px 10px $COLOR-PRUSSIAN;
+//              }
+//              .employee-information {
+//                justify-content: flex-start;
+//              }
+//              .employee-bio {
+//                @extend .text;
+//                display: flex;
+//                height: 65%;
+//                overflow-y: scroll;
+//                padding-top: 1rem;
+//                .bio-text {
+//                  margin-right: 2rem;
+//                }
+//              }
+//            }
+//          }
+//        }
+//        @include breakpoint(tablet) {
+//            width: unset;
+//            .team-employee {
+//              padding: 0;
+//            }
+//        }
+//        @include breakpoint(mobile) {
+//         
+//         
+//        }
+//      }
+//    }
+//  }
+//}
+
+
+/*
+=============================================================
+| ABOUT - CONTACT SECTION
+=============================================================
+*/
+
+.about {
+  .about-contact {
+    display: flex;
+    padding: 6rem 0px;
+    margin: 4rem 0;
+    position: relative;
+    flex-wrap: wrap;
+    .contact-heading {
+      width: 100%;
+      .contact-heading-text {
+        @extend .text-heading;
+        width: 50%;
+        margin: 1rem 0rem;
+        padding: 0rem 2rem;
+        text-align: center;
+      }
+    }
+    .contact-information {
+      background-color: $COLOR-BLACK-SQUEEZE;
+      flex: 1 1 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      .contact-information-text {
+        font-weight: 300;
+        line-height: 1.75rem;
+        padding-left: 4rem;
+      }
+      .contact-information-border {
+        background-color: $COLOR-PRUSSIAN;
+        height: 1px;
+        width: 12.5rem;
+        margin: 1rem 0px;
+      }
+    }
+    .contact-img-wrapper {
+      flex: 1 1 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: $COLOR-BLACK-SQUEEZE;
+      .contact-img {
+        height: 100%;
+        border-radius: 2px;
+        position: absolute;
+        align-self: center;
+      }
+    }
+  }
+  @include breakpoint(tablet) {
+    .about-contact {
+      flex-wrap: nowrap;
+      .contact-heading {
+        position: absolute;
+        top: 0;
+        width: 50%;
+        .contact-heading-text {
+          text-align: unset;
+        }
+      }
+      .contact-information {
+        .contact-information-text {
+          padding-left: 0rem;
+        }
+      }
+      .contact-img-wrapper {
+        .contact-img {
+          height: 75%;
+        }
+      }
+    }
+  }
+  @include breakpoint(mobile) {
+    .about-contact {
+      flex-wrap: wrap;
+      text-align: center;
+      padding: 0;
+      .contact-heading {
+        width: 100%;
+        position: unset;
+        .contact-heading-text {
+          width: 100%;
+        }
+      }
+      .contact-information {
+        padding: 1rem;
+        flex: 1 1 100%;
+      }
+      .contact-img-wrapper {
+        flex: 1 1 100%;
+        .contact-img {
+          width: 50%;
+          padding-bottom: 2rem;
+          position: unset;
+          height: auto;
+        }
+      }
+    }
+  }
+}
+
+/*
+=============================================================
+| ABOUT - GRID SECTION
+=============================================================
+*/
+
+.about {
+  .about-team {
+    .team-heading {
+      @extend .text-heading;
+      text-align: center;
+      padding: 2rem 0;
+      .team-description {
+        @extend .text;
+        padding: 1rem 0;
+      }
+    }
+    .team-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 2rem 0;
+      .team-employee {
+        flex: 0 1 25rem;
+        padding: 1rem;
+        text-align: center;
+        &[data-modal="false"] {
+          .employee-details:hover {
+            .employee-img-wrapper .employee-img-border {
+              @extend .circle-spin-hover;
+              .employee-icon {
+                &:before {
+                  right: 0;
+                  opacity: 1;
+                  transform: translate(0%,0)
+                }
+              }
+            }
+            .employee-description .employee-information .employee-border {
+              &:before {
+                transition: 0.4s all ease;
+                left: 0%;
+                right: 0%;
+                height: 2px;
+              }
+            }
+          }
+        }
+        .employee-details {
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          margin: 1rem;
+          cursor: pointer;
+          .employee-img-wrapper {
+            width: 45%;
+            position: relative;
+            &:after {
+              content: "";
+              display: block;
+              padding-bottom: 100%;
+            }
+            .employee-img-border {
+              @extend .circle-spin;
+              display: flex;
+              padding: 0.5rem;
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              .employee-img {
+                width: 100%;
+                position: relative;
+                overflow: hidden;
+                border-radius: 50%;
+                background-size: cover;
+              }
+              .employee-icon {
+                @extend .button-filled;
+                width: 2rem;
+                height: 2rem;
+                padding: 0;
+                font-size: 1.5rem;
+                font-weight: 300;
+                box-shadow: 1px 1px 8px -3px  $COLOR-CBRAIN;
+                position: absolute;
+                right: 0.5rem;
+                bottom: 0.5rem;
+                border-radius: 50%;
+                z-index: 1;
+                &:before {
+                  content: "";
+                  border-radius: 50%;
+                  position: absolute;
+                  top: 0;
+                  left: 0%;
+                  bottom: 0;
+                  right: 100%;
+                  opacity: 0;
+                  transition: 0.3s all linear;
+                }
+              }
+            }
+          }
+          .employee-description {
+            .employee-information {
+              margin: 1rem 0;
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: center;
+              .employee-name {
+                @extend .text-subtitle;
+                width: 100%;
+              }
+              .employee-border {
+                background-color: $COLOR-PRUSSIAN;
+                height: 1px;
+                width: 12.5rem;
+                margin: 1rem 0px;
+                position: relative;
+                transition: 0.3s all ease;
+                &::before {
+                  background: $COLOR-CBRAIN;
+                  position: absolute;
+                  content: "";
+                  top: 0;
+                  bottom: 0;
+                  left: 50%;
+                  right: 50%;
+                }
+              }
+              .employee-occupation {
+                width: 100%;
+              }
+            }
+            .employee-bio {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+  @include breakpoint(tablet) {
+    .about-team {
+      .team-grid {
+        .team-employee {
+          flex: 0 1 45%;
+        }
+      }
+    }
+  }
+  @include breakpoint(mobile) {
+    .about-team {
+      .team-heading {
+        padding: 0;
+      }
+      .team-grid {
+        padding: 2rem;
+        .team-employee {
+          flex: 0 1 100%;
+        }
+      }
+    }
+  }
+}
+
+/*
+=============================================================
+| ABOUT - MODAL
+=============================================================
+*/
+
+.about {
+  .about-team {
+    .team-grid {
+      .modal-background[data-modal="true"]{
+        display: flex;
+        background-color: $COLOR-MODAL-BACKGROUND;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        cursor: pointer;
+      }
+      .modal-container[data-modal="true"] {
+        height: $MODAL-HEIGHT + rem;
+        width: $MODAL-WIDTH + rem;
+        position: fixed;
+        z-index: 10;
+        top: 25%;
+        display: flex;
+        box-shadow: 0px 0px 30px -1px $COLOR-MODAL-BACKGROUND;
+        background-color: $COLOR-WHITE;
+        .team-employee[data-modal="true"] {
+          width: 100%;
+          height: 100%;
+          text-align: left;
+          flex: none;
+          padding: 2rem;
+          .employee-details {
+            width: 100%;
+            height: 100%;
+            margin: 0rem;
+            flex-wrap: nowrap;
+           .employee-img-wrapper {
+              width: 20%;
+              align-items: flex-start;
+              position: unset;
+             .employee-img-border {
+                position: unset;
+                width: 8rem;
+                height: 8rem;
+                border: 0;
+                &::before,
+                &::after {
+                  content: unset;
+                  border: 0;
+                }
+               .employee-icon {
+                  top: 0;
+                  right: 0;
+                  transform: translate(50%, -50%) rotate(45deg);
+                  cursor: pointer;
+                }
+              }
+            }
+            .employee-description {
+              height: 100%;
+              padding: 0 $MARGIN * 2 + rem;
+              display:flex;
+              flex-wrap: wrap;
+              justify-content:center;
+              ::-webkit-scrollbar {
+                -webkit-appearance: none;
+                width: 7px;
+                border-radius: 50px;
+              }
+              ::-webkit-scrollbar-thumb {
+                border-radius: 4px;
+                -webkit-box-shadow: inset 0 0 10px 10px $COLOR-PRUSSIAN;
+              }
+              .employee-information {
+                justify-content: flex-start;
+              }
+              .employee-bio {
+                @extend .text;
+                display: flex;
+                height: 65%;
+                overflow-y: scroll;
+                padding-top: 1rem;
+                .bio-text {
+                  margin-right: 2rem;
+                }
+              }
+            }
+          }
+        }
+        @include breakpoint(tablet) {
+            width: unset;
+            .team-employee {
+              padding: 0;
+            }
+        }
+        @include breakpoint(mobile) {
+         
+         
+        }
+      }
+    }
+  }
+}

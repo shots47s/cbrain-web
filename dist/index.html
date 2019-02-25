@@ -16,10 +16,33 @@
       href="https://fonts.googleapis.com/css?family=Roboto:300,400"
       rel="stylesheet"
     />
-  </head>
+  <link href="index.7c8e05f77f072a6c8dc1.css" rel="stylesheet"></head>
 
   <body>
-    <%= require('html-loader!../partials/nav.html') %>
+    <section class="nav" data-open="false">
+  <a class="logo" href="./index.html">
+    <img
+      class="logo-img"
+      src="assets/icons/icon-cbrain-white.png"
+      alt="cbrain logo"
+    />
+  </a>
+  <div class="bar">
+    <div class="links">
+      <a class="link" href="./features.html" data-page="features">FEATURES</a>
+      <a class="link" href="./projects.html" data-page="projects">PROJECTS</a>
+      <a class="link" href="./about.html" data-page="about">ABOUT</a>
+      <a class="link" href="./get-started.html" data-page="get-started"
+        >GET STARTED</a
+      >
+    </div>
+    <a class="login" href="https://portal.cbrain.mcgill.ca/login">Login</a>
+    <div class="burger">
+      <img class="burger-img" src="assets/nav-footer/nav-burger.png" />
+    </div>
+  </div>
+</section>
+
     <section class="home">
       <section class="banner">
         <div class="banner-content">
@@ -95,6 +118,32 @@
         <a class="button-outlined" href="features.html">LEARN MORE </a>
       </section>
     </section>
-    <%= require('html-loader!../partials/footer.html') %>
-  </body>
+    <footer class="partnership">
+  <div class="partnership-text">In partnership with</div>
+  <div class="partnership-icons">
+    <a href="https://www.mcgill.ca"
+      ><img
+        class="partnership-icon"
+        src="assets/nav-footer/footer-mcgill.png"
+    /></a>
+    <a href="http://ludmercentre.ca/"
+      ><img
+        class="partnership-icon"
+        src="assets/nav-footer/footer-ludmer.png"
+    /></a>
+    <a href="https://www.mcgill.ca/neuro/" .
+      ><img class="partnership-icon" src="assets/nav-footer/footer-neuro.png"
+    /></a>
+    <a href="http://mcin.ca/"
+      ><img class="partnership-icon" src="assets/nav-footer/footer-mcin.png"
+    /></a>
+    <a href="https://github.com/CARMIN-org/CARMIN-API"
+      ><img
+        class="partnership-icon"
+        src="assets/nav-footer/footer-carmin.png"
+    /></a>
+  </div>
+</footer>
+
+  <script type="text/javascript" src="js/index.7c8e05f77f072a6c8dc1.bundle.js"></script></body>
 </html>

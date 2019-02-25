@@ -44,7 +44,7 @@ export const loadAnimations = (elements, loop = false) => {
     .then(lottie => elements.map(el => lottie.loadAnimation({
       container: el,
       renderer: "svg",
-      path: `./assets/animations/${el.id}.json`,
+      path: `../assets/animations/${el.id}.json`,
       autoplay: false,
       loop,
       name: `${el.id}`,

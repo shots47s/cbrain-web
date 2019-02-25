@@ -1,0 +1,218 @@
+@import '../base';
+
+/*
+=============================================================
+| PROJECTS
+=============================================================
+*/
+
+$PADDING: 3;
+
+.projects {
+  margin: $PADDING * 1.5 + rem $PADDING + rem;
+  .projects-section {
+    @extend .cards-section;
+    .project {
+      @extend .card-wrapper;
+      .project-card {
+        @extend .card;
+        padding: $PADDING/2 + rem $PADDING/3 + rem;
+        .project-card-logo {
+          padding: 0 $PADDING + rem;
+          .project-card-img {
+            width: 100%;
+          }
+        }
+        .project-card-text {
+          @extend .card-text; 
+          flex-direction: column;
+          align-items: center;
+          height: 7rem;
+          padding: 0;
+          .project-card-title {
+            @extend .text-heading;
+            opacity: 0.5;
+            text-align: center;
+            padding: 0 + rem $PADDING/2 + rem;
+            transition: all 0.5s ease-in-out;
+          }
+        }
+        .project-card-toggle-icon {
+          height: 0.5rem;
+          transform: scaleY(1);
+          opacity: 0.2;
+          transition: all 0.5s ease-in-out;
+          position: absolute;
+          bottom: 1rem;
+        }
+        .project-card-bar {
+          @extend .bar-empty;
+        }
+        &:hover {
+          box-shadow: 0px 2px 8px 2px rgba(0, 0, 0, 0.2);
+          transition: all 0.2s linear;
+          .project-card-text {
+            .project-card-title {
+              opacity: 1;
+            }
+          }
+          .project-card-bar {
+            @extend .bar-filled;
+            transition: all 0.5s ease-in-out;
+          }
+        }
+      }
+      .project-content {
+        height: 0;
+        opacity: 0;
+        .project-content-wrapper {
+          position: absolute;
+          left: 0;
+          overflow:hidden;
+          .project-content-text {
+            text-align: justify;
+            padding: $PADDING + rem;
+            margin: $MARGIN * 2 + rem;
+            .project-content-header {
+              display: flex;
+              .project-content-link {
+                text-decoration: none;
+                .link-img {
+                  width: 2rem;
+                  padding: 0 0.6rem;
+                }
+              }
+            }
+            .project-content-description {
+              margin: $PADDING /2 + rem;
+            }
+          }
+        }
+      }
+
+      &[data-selected="false"] {
+        .project-content {
+          transition: all 0.5s ease-in-out;
+          .project-content-wrapper {
+            .project-content-text {
+              transition: margin-top 0.5s ease-in-out;
+            }
+          }
+        }
+      }
+      &[data-selected="true"] {
+        padding-bottom: 0;
+        transition: all 0.5s ease-in-out;
+        .project-card {
+          box-shadow: 0px 2px 8px 2px rgba(0, 0, 0, 0.2);
+          transition: all 0.2s linear;
+          .project-card-text {
+            opacity: 1;
+            transition: all 0.5s ease-in-out;
+            .project-card-title {
+              opacity: 1;
+            }
+          }
+            .project-card-toggle-icon {
+              transform: scaleY(-1);
+              opacity: 1;
+              transition: all 0.5s ease-in-out;
+            }
+          .project-card-logo {
+            .project-card-img {
+              opacity: 1;
+              transition: all 0.5s ease-in-out;
+            }
+          }
+          .project-card-bar {
+            @extend .bar-filled;
+            background-color: $COLOR_CBRAIN;
+            transition: all 0.5s ease-in-out;
+          }
+        }
+        .project-content {
+          opacity:1;
+          transition: all 0.5s linear;
+          .project-content-wrapper {
+            .project-content-text {
+              @extend .text;
+              transition: margin-top 0.5s ease-in-out;
+              .project-content-header {
+                .project-content-title {
+                  @extend .text-heading;
+                  text-align: center;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @include breakpoint(desktop_xlarge) {
+    margin: $PADDING * 1.5 + rem $PADDING * 7 + rem;
+  }
+  @include breakpoint(tablet) {
+    margin: 0;
+    .projects-section {
+      margin: 2rem;
+      .project {
+        flex: 1 1 100%;
+        .project-card {
+          .project-card-text {
+            height: 4rem;
+            margin-bottom: 2rem;
+          }
+        }
+        .project-content {
+          .project-content-wrapper {
+            .project-content-text {
+              margin: 0;
+              .project-content-header {
+                justify-content: center;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @include breakpoint(mobile) {
+    .projects-section {
+      margin: 0;
+      .project {
+        padding: 1rem;
+        .project-card {
+          .project-card-logo {
+            padding: 0 1rem;
+          }
+          .project-card-text {
+            height: 0;
+            margin-bottom: 0;
+            .project-card-title {
+              display: none;
+            }
+          }
+        }
+        &[data-selected="true"] {
+          .project-content {
+            .project-content-wrapper {
+              .project-content-text {
+                text-align: left;
+                padding: 1rem;
+                .project-content-header {
+                  .project-content-title {
+                    font-size: 1.2rem;
+                  }
+                }
+                .project-content-description {
+                  margin: 1rem;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

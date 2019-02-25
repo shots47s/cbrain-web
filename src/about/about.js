@@ -2,41 +2,34 @@ import "./about.scss";
 import "../partials/partials";
 import teamData from "../team-data.json";
 
-let selectedId;
-const modalBackgroundEl = document.querySelector(".modal-background");
-const modalContainer = document.querySelector(".modal-container");
+let selected_id;
+const modal_background = document.querySelector(".modal-background");
+const modal_container = document.querySelector(".modal-container");
 
-const openModal = (e) => {
-  const selectedEmployeeEl = document.querySelector(`[data-id = "${selectedId}"]`);
-  if (selectedEmployeeEl.dataset.modal === "false") {
-    selectedEmployeeEl.dataset.modal = "true";
-    modalBackgroundEl.dataset.modal = "true";
-    modalContainer.dataset.modal = "true";
-    const employeeEl = selectedEmployeeEl.cloneNode(true);
-    const modalIcon = employeeEl.querySelector(".employee-icon");
-    modalIcon.addEventListener("click", closeModal);
-    modalContainer.appendChild(employeeEl);
+const toggleModal = (e) => {
+  selected_id = e.currentTarget.dataset.id;
+  const modal_els = Array.from(document.querySelectorAll("[data-modal='true']"));
+
+  if (modal_els.length > 0) {
+    modal_container.removeChild(modal_container.firstChild);
+    selected_id = "";
+    return modal_els.map((_) => {
+      _.dataset.modal = "false";
+    });
   }
-};
-
-const closeModal = (e) => {
-  e.stopPropagation();
-  const modalList = Array.from(document.querySelectorAll("[data-modal=\"true\"]"));
-  modalList.map((_) => {
-    _.dataset.modal = "false";
-  });
-  modalContainer.removeChild(modalContainer.firstChild);
-  selectedId = "";
-};
-
-const setSelection = (e, type) => {
-  selectedId = e.currentTarget.dataset.id;
-  openModal();
+  const selected_employee = document.querySelector(`[data-id = "${selected_id}"]`);
+  const cloned_employee = selected_employee.cloneNode(true);
+  const close_icon = employee.querySelector(".employee-icon");
+  selected_employee.dataset.modal = "true";
+  modal_background.dataset.modal = "true";
+  modal_container.dataset.modal = "true";
+  close_icon.addEventListener("click", toggleModal);
+  modal_container.appendChild(employee);
 };
 
 const loadGrid = Object.entries(teamData).map(([k, v], i) => {
   let employee = document.querySelector(".team-employee");
-  if (i != 0) {
+  if (i !== 0) {
     employee = employee.cloneNode(true);
   }
   const grid_el = document.querySelector(".team-grid");
@@ -44,20 +37,18 @@ const loadGrid = Object.entries(teamData).map(([k, v], i) => {
   const employee_name = employee.querySelector(".employee-name");
   const employee_occupation = employee.querySelector(".employee-occupation");
   const employee_bio = employee.querySelector(".bio-text");
-  const modal_icon = employee.querySelector(".employee-icon");
-  require.context("../assets/team", true, /\.(png|jpe?g|svg)$/);
+  require.context("../assets/team", true, /\.(png|jpeg|svg)$/);
   employee_img.style.backgroundImage =  `url('./assets/team/${v.imageURL}')`;
   employee_name.textContent = `${v.name}`;
-  employee_occupation.textContent = ` ${v.occupation}`;
-  employee_bio.textContent = ` ${v.bio}`;
+  employee_occupation.textContent = `${v.occupation}`;
+  employee_bio.textContent = `${v.bio}`;
 
   employee.dataset.id = i;
   employee.dataset.modal = "false";
-  employee.addEventListener("click", setSelection);
-  modal_icon.addEventListener("click", openModal);
-  grid_el.appendChild(employee);
+  employee.addEventListener("click", toggleModal);
+  return grid_el.appendChild(employee);
 });
 
 
 window.addEventListener("load", loadGrid);
-modalBackgroundEl.addEventListener("click", closeModal);
+modal_background.addEventListener("click", toggleModal);

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <meta content="utf-8" http-equiv="encoding" />
+    <meta name="viewport" content="width = device-width, initial-scale = 1" />
+    <title>CBRAIN | Projects</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="./assets/icons/icon-cbrain-thumbnail.png"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <%= require('html-loader!../partials/nav.html') %>
+    <section class="projects">
+      <div class="projects-section">
+        <div class="project">
+          <div class="project-card">
+            <div class="project-card-logo">
+              <img class="project-card-img" />
+            </div>
+            <div class="project-card-text">
+              <p class="project-card-title"></p>
+              <img
+                class="project-card-toggle-icon"
+                src="../assets/icons/icon-show.png"
+              />
+            </div>
+            <div class="project-card-bar"></div>
+          </div>
+          <div class="project-content">
+            <div class="project-content-wrapper">
+              <div class="project-content-text">
+                <div class="project-content-header">
+                  <div class="project-content-title"></div>
+                  <a class="project-content-link">
+                    <img
+                      class="link-img"
+                      src="../assets/icons/icon-external-link.png"
+                      alt="link to project"
+                    />
+                  </a>
+                </div>
+                <div class="project-content-description"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <%= require('html-loader!../partials/footer.html') %>
+  </body>
+</html>

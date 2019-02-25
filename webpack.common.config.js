@@ -8,6 +8,7 @@ module.exports = {
   entry: {
     index: "./src/index/index.js",
     about: "./src/about/about.js",
+    projects: "./src/projects/projects.js",
   },
   output: {
     filename: "js/[name].[hash].bundle.js",
@@ -66,7 +67,11 @@ module.exports = {
       template: "src/about/about.html",
       chunks: ["about"],
     }),
-
+    new HtmlWebpackPlugin({
+      filename: "projects.html",
+      template: "src/projects/projects.html",
+      chunks: ["projects"],
+    }),
     new CopyWebpackPlugin([{ from: "src/assets", to: "assets" }]),
   ],
 };

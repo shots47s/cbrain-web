@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "A website for CBRAIN",
   "private": "true",
+  "homepage": "https://github.com/candicecz/cbrain-web",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.prod.config.js",
-    "start": "webpack-dev-server --config webpack.dev.config.js"
+    "start": "webpack-dev-server --config webpack.dev.config.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -18,7 +21,6 @@
   "bugs": {
     "url": "https://github.com/candicecz/cbrain-web/issues"
   },
-  "homepage": "https://github.com/candicecz/cbrain-web#readme",
   "devDependencies": {
     "@babel/core": "^7.3.3",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
@@ -45,6 +47,7 @@
     "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {
+    "gh-pages": "^2.0.1",
     "mini-css-extract-plugin": "^0.5.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss": "^7.0.14",

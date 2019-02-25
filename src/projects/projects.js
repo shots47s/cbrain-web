@@ -40,7 +40,7 @@ const loadData = () => {
       project = project.cloneNode(true);
     }
     project.querySelector(".project-card-title").textContent = `${v.title}`;
-    project.querySelector(".project-card-img").src = `../assets/icons/icon-${
+    project.querySelector(".project-card-img").src = `./assets/icons/icon-${
       v.icon
     }`;
     project.querySelector(".project-content-title").textContent = `${v.title}`;

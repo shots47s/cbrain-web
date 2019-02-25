@@ -7,10 +7,12 @@
 */
 
 .home {
+  width: 100%;
   .banner {
     background-color: $COLOR-AQUA-ISLAND;
     display: flex;
     padding: $PADDING * 3.5 + rem 0;
+    width: 100%;
     .banner-content {
       width: 100%;
       display: flex;

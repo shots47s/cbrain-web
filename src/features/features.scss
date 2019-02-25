@@ -1,0 +1,133 @@
+@import "../base";
+
+/*
+=============================================================
+| FEATURES
+=============================================================
+*/
+
+.features {
+  .feature {
+    padding: 4rem 9rem;
+    .feature-headline {
+      @extend .text-heading;
+      text-align: right;
+    }
+    .feature-content {
+      @extend .text;
+      margin-top: $MARGIN + rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      .feature-img {
+        flex:  0 0 250px;
+        border-radius: 4px;
+        height: fit-content;
+        align-self: center;
+        margin-right: 2rem;
+        opacity: 1;
+        transition: opacity 0.2s ease;
+        &[data-animate="false"] {
+          opacity: 0.2;
+          transition: opacity 0.2s ease;
+        }
+      }
+      .feature-paragraph { 
+        flex: 1 1 50%;
+        margin-left: 2rem;
+        text-align: justify;
+        p {
+          margin-bottom: 1rem;
+        }
+
+      }
+    }
+    &.reversed {
+      @extend .background-black-squeeze;
+      .feature-headline {
+        text-align: left;
+      }
+      .feature-content {
+        flex-direction: row-reverse;
+        .feature-img {
+          @extend .background-white;
+          margin-left: 2rem;
+          margin-right: 0rem;
+        }
+        .feature-paragraph {
+          margin-left: 0;
+          margin-right: 2rem;
+        }
+      }
+    }
+  }
+  @include breakpoint(desktop_large) {
+    .feature {
+      padding: 4rem 25%;
+
+    }
+  }
+  @include breakpoint(tablet) {
+    .feature {
+      padding: 4rem 2rem;
+      .feature-headline {
+        text-align:center;
+      }
+      .feature-content {
+        .feature-img {
+          margin-right: 1rem;
+        }
+        .feature-paragraph {
+          margin-left: 1rem;
+        }
+      }
+      &.reversed {
+        .feature-headline {
+          text-align: center;
+        }
+        .feature-content {
+          .feature-img {
+            margin-left: 1rem;
+            margin-right: 0rem;
+          }
+          .feature-paragraph {
+            margin-left: 0;
+            margin-right: 1rem;
+          }
+        }
+      }
+    }
+  }
+  @include breakpoint(mobile) {
+    .feature {
+      padding: 4rem 2rem;
+      .feature-content {
+        margin-top:0;
+        .feature-img {
+          margin-left: 0;
+          margin-right: 0;
+          margin: 2rem 0;
+        }
+        .feature-paragraph {
+          margin-left: 0;
+          margin-right: 0;
+          flex: 1 1 100%;
+          text-align: left;
+        }
+      }
+      &.reversed {
+        .feature-content {
+          .feature-img {
+            margin-left: 0rem;
+            margin-right: 0rem;
+          }
+          .feature-paragraph {
+            margin-left: 0;
+            margin-right: 0rem;
+          }
+        }
+      }
+    }
+  }
+}

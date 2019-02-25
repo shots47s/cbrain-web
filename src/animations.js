@@ -39,7 +39,6 @@ export const handleAnimations = elements => elements.map((el) => {
 });
 
 export const loadAnimations = (elements, loop = false) => {
-  require.context("./assets/animations", true, /\.json$/);
   import(/* webpackChunkName:"lottie" */ "./lottie")
     .then(lottie => elements.map(el => lottie.loadAnimation({
       container: el,

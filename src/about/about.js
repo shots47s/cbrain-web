@@ -13,14 +13,14 @@ const toggleModal = (e) => {
   if (modal_els.length > 0) {
     modal_container.removeChild(modal_container.firstChild);
     selected_id = "";
-    return modal_els.map((_) => {
+    modal_els.map((_) => {
       _.dataset.modal = "false";
     });
   }
   const selected_employee = document.querySelector(`[data-id = "${selected_id}"]`);
-  const cloned_employee = selected_employee.cloneNode(true);
+  const employee = selected_employee.cloneNode(true);
   const close_icon = employee.querySelector(".employee-icon");
-  selected_employee.dataset.modal = "true";
+  employee.dataset.modal = "true";
   modal_background.dataset.modal = "true";
   modal_container.dataset.modal = "true";
   close_icon.addEventListener("click", toggleModal);

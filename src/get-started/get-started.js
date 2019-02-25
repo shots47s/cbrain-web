@@ -1,4 +1,5 @@
 import "./get-started.scss";
+import "../partials/partials";
 
 const selectResource = (e) => {
   const resource_els = Array.from(document.querySelectorAll("[data-option]"));

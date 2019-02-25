@@ -107,12 +107,16 @@
   @include breakpoint(mobile) {
     .get-started-options {
       margin: 0;
+      .resource-option {
+        padding: 0;
+      }
     }
     .get-started-resources {
       &[data-selected="true"]{
         margin: 0;
         .resource-card-wrapper {
           padding: 1rem;
+          padding-bottom: 0;
         }
 
       }

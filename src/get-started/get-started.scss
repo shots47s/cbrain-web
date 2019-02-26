@@ -8,10 +8,12 @@
 
 .get-started {
   margin: $PADDING * 1.5 + rem $PADDING + rem;
+  width: 100%;
   .get-started-options {
     box-shadow: 0px 4px 5px -4px rgba(0, 0, 0, 0.2);
     display: flex;
-    margin: 4rem;
+    margin: $MARGIN * 2 + rem;
+    justify-content: center;
     .resource-option {
       position: relative;
       padding: 0.5rem;
@@ -48,26 +50,23 @@
   .get-started-resources {
     &[data-selected="true"] {
       @extend .cards-section;
+      justify-content: center;
       .resource-card-wrapper {
         @extend .card-wrapper;
-        flex: 1 1 30%;
+        padding: 1rem;
+        flex: 0 0 30%;
         .resource-card {
           @extend .card;
-          height: 100%;
+          padding: 1rem;
           .resource-card-img {
             @extend .card-img;
-            .resource-card-svg{
-              width: 50%;
-              fill: grey;
-              stroke: grey;
-              transition: 0.5s all ease;
-            }
+            padding: 0;
           }
           .resource-card-text {
             @extend .card-text;
-            text-transform: capitalize;
             text-align: center;
-            padding: 1rem 2rem;
+            padding: 0;
+            padding-top: 1rem;
           }
           .resource-card-bottom {
             @extend .card-bottom;
@@ -88,37 +87,45 @@
       display:none
     }
   }
+  @include breakpoint(desktop_xlarge) {
+    margin: 0 15%;
+  }
   @include breakpoint(tablet) {
     .get-started-options {
       flex-direction: column;
       justify-content: center;
+      margin: 0;
       .resource-option {
         margin-right:0;
         align-self: center;
-
+        padding: 0;
+        margin: $MARGIN/2 + rem;
       }
-
     }
-    .get-started-resources {
-      flex-direction: column;
-
+    .get-started-resources[data-selected="true"] {
+      margin: $MARGIN + rem 0;
+      width: 100%;
+      .resource-card-wrapper {
+        display: flex;
+        justify-content: center;
+        flex: 1 1 100%;
+        .resource-card {
+          flex: 0 0 50%;
+        }
+      }
     }
   }
   @include breakpoint(mobile) {
-    .get-started-options {
-      margin: 0;
-      .resource-option {
-        padding: 0;
-      }
-    }
     .get-started-resources {
       &[data-selected="true"]{
         margin: 0;
         .resource-card-wrapper {
           padding: 1rem;
           padding-bottom: 0;
+          .resource-card {
+            flex: 1 1 100%;
+          }
         }
-
       }
     }
   }

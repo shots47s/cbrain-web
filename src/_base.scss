@@ -78,12 +78,10 @@ $MODAL-HEIGHT: 32;
   font-weight: 300;
 }
 
-.text-title {
+.text-card {
   @extend .text;
-  font-size: 3rem;
   font-weight: 600;
-  color: $COLOR-WHITE;
-  line-height: 5rem;
+  text-transform: capitalize;
 }
 
 .text-heading {
@@ -218,7 +216,7 @@ $MODAL-HEIGHT: 32;
   flex-wrap: wrap;
   position: relative;
   justify-content: space-between;
-  margin: 2rem;
+  margin: $MARGIN * 2 + rem;
   .card-wrapper {
     flex: 0 1 50%;
     padding: $MARGIN * 2 + rem;
@@ -240,6 +238,7 @@ $MODAL-HEIGHT: 32;
         padding: 1rem 2rem;
       }
       .card-text {
+        @extend .text-card;
         flex: 1 1 100%;
         display:flex;
         justify-content: center;

@@ -26,9 +26,6 @@
         padding-right: $PADDING * 10 + rem;
         z-index: 2;
         background-image: linear-gradient(to right, #A7D4DD 90%, rgba(167, 212, 221,0.1));
-        .banner-description-heading {
-          @extend .text-title;
-        }
         .banner-description-img {
           width: 15rem;
         }

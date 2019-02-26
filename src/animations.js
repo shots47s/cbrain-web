@@ -19,14 +19,14 @@ const startAnimation = (el) => {
   el.dataset.animate = "true";
   import(/* webpackChunkName:"lottie" */ "./lottie")
     .then(lottie => lottie.play(el.id))
-    .catch(err => console.log(err));
+    .catch(err => err);
 };
 
 const stopAnimation = (el) => {
   el.dataset.animate = "false";
   import(/* webpackChunkName:"lottie" */ "./lottie")
     .then(lottie => lottie.stop(el.id))
-    .catch(err => console.log(err));
+    .catch(err => err);
 };
 
 export const handleAnimations = elements => elements.map((el) => {
@@ -39,15 +39,15 @@ export const handleAnimations = elements => elements.map((el) => {
 });
 
 export const loadAnimations = (elements, loop = false) => {
-  import(/* webpackChunkName:"lottie" */ "./lottie")
-    .then(lottie => elements.map(el => lottie.loadAnimation({
-      container: el,
-      renderer: "svg",
-      path: `../assets/animations/${el.id}.json`,
-      autoplay: false,
-      loop,
-      name: `${el.id}`,
-    })))
-    .catch(err => console.log(err));
-  handleAnimations(elements);
+ import(/* webpackChunkName:"lottie" */ "./lottie")
+   .then(lottie => elements.map(el => lottie.loadAnimation({
+     container: el,
+     renderer: "svg",
+     path: `../assets/animations/${el.id}.json`,
+     autoplay: false,
+     loop,
+     name: `${el.id}`,
+   })))
+   .catch(err => err);
+ handleAnimations(elements);
 };

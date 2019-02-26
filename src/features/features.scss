@@ -21,9 +21,10 @@
       justify-content: center;
       align-items: center;
       .feature-img {
-        flex:  0 0 250px;
+        @extend .background-black-squeeze;
+        width: 250px;
+        height: 250px;
         border-radius: 4px;
-        height: fit-content;
         align-self: center;
         margin-right: 2rem;
         opacity: 1;

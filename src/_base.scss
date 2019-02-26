@@ -202,13 +202,13 @@ $MODAL-HEIGHT: 32;
   left: 50%;
   right: 50%;
   bottom: 0;
-  transition: 0.2s all ease;
+  transition: 0.2s left ease, 0.2s right ease;
 }
 
 .bar-filled {
   left: 0;
   right: 0;
-  transition: 0.2s all ease;
+  transition: 0.2s left ease, 0.2s right ease;
 }
 
 .cards-section {

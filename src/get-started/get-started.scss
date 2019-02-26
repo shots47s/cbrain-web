@@ -24,11 +24,16 @@
         color: $COLOR-PRUSSIAN;
         text-transform: uppercase;
         font-weight: 600;
+        opacity: 0.3;
       }
       .resource-option-bar{
         @extend .bar-empty;
       }
       &[data-selected="true"] {
+        .resource-option-text {
+          opacity: 1;
+          transition: 0.2s opacity ease;
+        }
         .resource-option-bar {
           @extend .bar-filled;
         }
@@ -36,13 +41,13 @@
       &[data-selected="false"] {
         .resource-option-text {
           opacity: 0.3;
-          transition: 0.2s all ease;
+          transition: 0.2s opacity ease;
         }
       }
       &:hover {
         .resource-option-text {
           opacity: 1;
-          transition: 0.2s all ease;
+          transition: 0.2s opacity ease;
         }
       }
     }
@@ -61,6 +66,10 @@
           .resource-card-img {
             @extend .card-img;
             padding: 0;
+            width: 100%;
+            img {
+              width: 100%;
+            }
           }
           .resource-card-text {
             @extend .card-text;
@@ -70,15 +79,6 @@
           }
           .resource-card-bottom {
             @extend .card-bottom;
-          }
-          &:hover {
-            .resource-card-img {
-              .resource-card-svg {
-                fill: $COLOR-CBRAIN;
-                stroke: $COLOR-CBRAIN;
-                transition: 0.2s all ease;
-              }
-            }
           }
         }
       }
@@ -116,14 +116,23 @@
     }
   }
   @include breakpoint(mobile) {
-    .get-started-resources {
-      &[data-selected="true"]{
-        margin: 0;
-        .resource-card-wrapper {
+    .get-started-resources[data-selected="true"]{
+      margin: 0;
+      flex-direction: row;
+      .resource-card-wrapper {
+        padding: 1rem 0;
+        padding-bottom: 0;
+        .resource-card {
+          flex: 1 1 100%;
           padding: 1rem;
-          padding-bottom: 0;
-          .resource-card {
-            flex: 1 1 100%;
+          .resource-card-img {
+            width: 50%;
+            height: 150px;
+          }
+          .resource-card-text {
+            padding-top: 1rem;
+            width: 100%;
+            flex: unset;
           }
         }
       }

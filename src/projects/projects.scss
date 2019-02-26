@@ -34,7 +34,6 @@ $PADDING: 3;
             opacity: 0.5;
             text-align: center;
             padding: 0 + rem $PADDING/2 + rem;
-            transition: all 0.5s ease-in-out;
           }
         }
         .project-card-toggle-icon {
@@ -75,6 +74,9 @@ $PADDING: 3;
             margin: $MARGIN * 2 + rem;
             .project-content-header {
               display: flex;
+              .project-content-title {
+                @extend .text-heading;
+              }
               .project-content-link {
                 text-decoration: none;
                 .link-img {
@@ -139,7 +141,6 @@ $PADDING: 3;
               transition: margin-top 0.5s ease-in-out;
               .project-content-header {
                 .project-content-title {
-                  @extend .text-heading;
                   text-align: center;
                 }
               }

@@ -2,25 +2,9 @@ import "./projects.scss";
 import "../partials/partials";
 import projectData from "../projects-data.json";
 
-const toggleProjectContent = (e) => {
-  const selected_els = Array.from(
-    document.querySelectorAll("[data-selected = 'true']"),
-  );
-  const parent_el = e.currentTarget.parentElement;
-  if (!parent_el.dataset.selected || parent_el.dataset.selected === "false") {
-    selected_els.map((_) => {
-      _.dataset.selected = "false";
-    });
-    parent_el.dataset.selected = "true";
-  } else {
-    parent_el.dataset.selected = "false";
-  }
-  showContent();
-};
 
-const showContent = () => {
-  const projects = Array.from(document.querySelectorAll(".project"));
-  projects.map((_) => {
+const loadContent = () => {
+  Array.from(document.querySelectorAll(".project")).map((_) => {
     const content_el = _.querySelector(".project-content");
     const description_el = _.querySelector(".project-content-text");
     const description_height = description_el.getBoundingClientRect().height;
@@ -30,7 +14,22 @@ const showContent = () => {
       content_el.style.height = `${description_height}px`;
       description_el.style.marginTop = `${0}px`;
     }
+    return null;
   });
+};
+
+const toggleProjectContent = (e) => {
+  const parent_el = e.currentTarget.parentElement;
+  if (!parent_el.dataset.selected || parent_el.dataset.selected === "false") {
+    Array.from(document.querySelectorAll("[data-selected = 'true']")).map((_) => {
+      _.dataset.selected = "false";
+      return null;
+    });
+    parent_el.dataset.selected = "true";
+  } else {
+    parent_el.dataset.selected = "false";
+  }
+  loadContent();
 };
 
 const loadData = () => {
@@ -53,11 +52,11 @@ const loadData = () => {
       .querySelector(".project-card")
       .addEventListener("click", toggleProjectContent);
     project.dataset.selected = "false";
-    projects_section.appendChild(project);
+    return projects_section.appendChild(project);
   });
-  showContent();
+  loadContent();
 };
 
 window.addEventListener("load", loadData);
-window.addEventListener("load", showContent);
-window.addEventListener("resize", showContent);
+window.addEventListener("load", loadContent);
+window.addEventListener("resize", loadContent);

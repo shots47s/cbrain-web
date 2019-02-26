@@ -7,11 +7,10 @@ const selectResource = (e) => {
     _.dataset.option === e.currentTarget.dataset.option
       ? (_.dataset.selected = "true")
       : (_.dataset.selected = "false");
+    return null;
   });
 };
 
 Array.from(
   document.querySelectorAll(".resource-option"),
-).map((_) => {
-  _.addEventListener("click", selectResource);
-});
+).map(_ => _.addEventListener("click", selectResource));

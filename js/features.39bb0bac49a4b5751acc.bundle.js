@@ -36,14 +36,14 @@
 /******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 	// Promise = chunk loading, 0 = chunk loaded
 /******/ 	var installedChunks = {
-/******/ 		3: 0
+/******/ 		1: 0
 /******/ 	};
 /******/
 /******/
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"4":"lottie"}[chunkId]||chunkId) + "." + "18c08c8aaf6155b83d61" + ".bundle.js"
+/******/ 		return __webpack_require__.p + "" + ({"4":"lottie"}[chunkId]||chunkId) + "." + "39bb0bac49a4b5751acc" + ".bundle.js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -193,7 +193,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 17);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -788,73 +788,6 @@ module.exports = function (css) {
 
 /***/ }),
 /* 3 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return handleAnimations; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return loadAnimations; });
-/*
-=============================================================
- | ANIMATIONS
-=============================================================
-*/
-var isElementInView = function isElementInView(el) {
-  var boundsEl = el.getBoundingClientRect();
-  return boundsEl.top >= 0 && boundsEl.left >= 0 && boundsEl.bottom <= (window.innerHeight || document.documentElement.clientHeight) && boundsEl.right <= (window.innerWidth || document.documentElement.clientHeight);
-};
-
-var startAnimation = function startAnimation(el) {
-  el.dataset.animate = "true";
-  __webpack_require__.e(/* import() | lottie */ 4).then(__webpack_require__.t.bind(null, 4, 7)).then(function (lottie) {
-    return lottie.play(el.id);
-  }).catch(function (err) {
-    return console.log(err);
-  });
-};
-
-var stopAnimation = function stopAnimation(el) {
-  el.dataset.animate = "false";
-  __webpack_require__.e(/* import() | lottie */ 4).then(__webpack_require__.t.bind(null, 4, 7)).then(function (lottie) {
-    return lottie.stop(el.id);
-  }).catch(function (err) {
-    return console.log(err);
-  });
-};
-
-var handleAnimations = function handleAnimations(elements) {
-  return elements.map(function (el) {
-    var is_animate = JSON.parse(el.dataset.animate);
-    var is_visible = isElementInView(el);
-
-    if (is_animate === is_visible) {
-      return null;
-    }
-
-    return is_visible ? startAnimation(el) : stopAnimation(el);
-  });
-};
-var loadAnimations = function loadAnimations(elements) {
-  var loop = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-  __webpack_require__.e(/* import() | lottie */ 4).then(__webpack_require__.t.bind(null, 4, 7)).then(function (lottie) {
-    return elements.map(function (el) {
-      return lottie.loadAnimation({
-        container: el,
-        renderer: "svg",
-        path: "../assets/animations/".concat(el.id, ".json"),
-        autoplay: false,
-        loop: loop,
-        name: "".concat(el.id)
-      });
-    });
-  }).catch(function (err) {
-    return console.log(err);
-  });
-  handleAnimations(elements);
-};
-
-/***/ }),
-/* 4 */,
-/* 5 */
 /***/ (function(module, exports) {
 
 /*
@@ -878,18 +811,97 @@ burger.addEventListener("click", toggleNavigation);
 window.addEventListener("load", setSelectedLink);
 
 /***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return handleAnimations; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return loadAnimations; });
+/*
+=============================================================
+ | ANIMATIONS
+=============================================================
+*/
+var isElementInView = function isElementInView(el) {
+  var boundsEl = el.getBoundingClientRect();
+  return boundsEl.top >= 0 && boundsEl.left >= 0 && boundsEl.bottom <= (window.innerHeight || document.documentElement.clientHeight) && boundsEl.right <= (window.innerWidth || document.documentElement.clientHeight);
+};
+
+var startAnimation = function startAnimation(el) {
+  el.dataset.animate = "true";
+  __webpack_require__.e(/* import() | lottie */ 4).then(__webpack_require__.t.bind(null, 6, 7)).then(function (lottie) {
+    return lottie.play(el.id);
+  }).catch(function (err) {
+    return err;
+  });
+};
+
+var stopAnimation = function stopAnimation(el) {
+  el.dataset.animate = "false";
+  __webpack_require__.e(/* import() | lottie */ 4).then(__webpack_require__.t.bind(null, 6, 7)).then(function (lottie) {
+    return lottie.stop(el.id);
+  }).catch(function (err) {
+    return err;
+  });
+};
+
+var handleAnimations = function handleAnimations(elements) {
+  return elements.map(function (el) {
+    var is_animate = JSON.parse(el.dataset.animate);
+    var is_visible = isElementInView(el);
+
+    if (is_animate === is_visible) {
+      return null;
+    }
+
+    return is_visible ? startAnimation(el) : stopAnimation(el);
+  });
+};
+var loadAnimations = function loadAnimations(elements) {
+  var loop = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  __webpack_require__.e(/* import() | lottie */ 4).then(__webpack_require__.t.bind(null, 6, 7)).then(function (lottie) {
+    return elements.map(function (el) {
+      return lottie.loadAnimation({
+        container: el,
+        renderer: "svg",
+        path: "./assets/animations/".concat(el.id, ".json"),
+        autoplay: false,
+        loop: loop,
+        name: "".concat(el.id)
+      });
+    });
+  }).catch(function (err) {
+    return err;
+  });
+  handleAnimations(elements);
+};
+
+/***/ }),
+/* 5 */,
 /* 6 */,
 /* 7 */,
-/* 8 */
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9);
-/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _animations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
-/* harmony import */ var _partials_partials__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _features_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(18);
+/* harmony import */ var _features_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_features_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _animations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _partials_partials__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
 /* harmony import */ var _partials_partials__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_partials_partials__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _assets_animations_features_02_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(20);
+var _assets_animations_features_02_json__WEBPACK_IMPORTED_MODULE_3___namespace = /*#__PURE__*/__webpack_require__.t(20, 1);
+
 
 
 
@@ -905,11 +917,11 @@ window.addEventListener("resize", function () {
 });
 
 /***/ }),
-/* 9 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(10);
+var content = __webpack_require__(19);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -930,7 +942,7 @@ if(content.locals) module.exports = content.locals;
 if(false) {}
 
 /***/ }),
-/* 10 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -939,6 +951,12 @@ exports.push([module.i, "", ""]);
 
 
 
+/***/ }),
+/* 20 */
+/***/ (function(module) {
+
+module.exports = {};
+
 /***/ })
 /******/ ]);
-//# sourceMappingURL=index.18c08c8aaf6155b83d61.bundle.js.map
+//# sourceMappingURL=features.39bb0bac49a4b5751acc.bundle.js.map

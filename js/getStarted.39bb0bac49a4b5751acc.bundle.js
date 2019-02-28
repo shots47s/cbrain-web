@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 22);
+/******/ 	return __webpack_require__(__webpack_require__.s = 21);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -679,33 +679,37 @@ module.exports = function (css) {
 
 /***/ }),
 
-/***/ 22:
+/***/ 21:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _get_started_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(23);
+/* harmony import */ var _get_started_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(22);
 /* harmony import */ var _get_started_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_get_started_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _partials_partials__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
+/* harmony import */ var _partials_partials__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_partials_partials__WEBPACK_IMPORTED_MODULE_1__);
+
 
 
 var selectResource = function selectResource(e) {
   var resource_els = Array.from(document.querySelectorAll("[data-option]"));
   return resource_els.map(function (_) {
     _.dataset.option === e.currentTarget.dataset.option ? _.dataset.selected = "true" : _.dataset.selected = "false";
+    return null;
   });
 };
 
 Array.from(document.querySelectorAll(".resource-option")).map(function (_) {
-  _.addEventListener("click", selectResource);
+  return _.addEventListener("click", selectResource);
 });
 
 /***/ }),
 
-/***/ 23:
+/***/ 22:
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(24);
+var content = __webpack_require__(23);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -727,7 +731,7 @@ if(false) {}
 
 /***/ }),
 
-/***/ 24:
+/***/ 23:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -736,7 +740,32 @@ exports.push([module.i, "", ""]);
 
 
 
+/***/ }),
+
+/***/ 3:
+/***/ (function(module, exports) {
+
+/*
+ ============================================================
+ | NAVIGATION BAR
+ ============================================================
+*/
+var setSelectedLink = function setSelectedLink() {
+  var selection = window.location.pathname.split("/")[1].split(".")[0];
+  var selected_link = document.querySelector("[data-page='".concat(selection, "']"));
+  selected_link.dataset.selected = true;
+};
+
+var toggleNavigation = function toggleNavigation() {
+  var nav = document.querySelector(".nav");
+  return nav.dataset.open === "false" ? nav.setAttribute("data-open", "true") : nav.setAttribute("data-open", "false");
+};
+
+var burger = document.querySelector(".burger");
+burger.addEventListener("click", toggleNavigation);
+window.addEventListener("load", setSelectedLink);
+
 /***/ })
 
 /******/ });
-//# sourceMappingURL=getStarted.18c08c8aaf6155b83d61.bundle.js.map
+//# sourceMappingURL=getStarted.39bb0bac49a4b5751acc.bundle.js.map

@@ -1,6 +1,50 @@
 /******/ (function(modules) { // webpackBootstrap
+/******/ 	// install a JSONP callback for chunk loading
+/******/ 	function webpackJsonpCallback(data) {
+/******/ 		var chunkIds = data[0];
+/******/ 		var moreModules = data[1];
+/******/
+/******/
+/******/ 		// add "moreModules" to the modules object,
+/******/ 		// then flag all "chunkIds" as loaded and fire callback
+/******/ 		var moduleId, chunkId, i = 0, resolves = [];
+/******/ 		for(;i < chunkIds.length; i++) {
+/******/ 			chunkId = chunkIds[i];
+/******/ 			if(installedChunks[chunkId]) {
+/******/ 				resolves.push(installedChunks[chunkId][0]);
+/******/ 			}
+/******/ 			installedChunks[chunkId] = 0;
+/******/ 		}
+/******/ 		for(moduleId in moreModules) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if(parentJsonpFunction) parentJsonpFunction(data);
+/******/
+/******/ 		while(resolves.length) {
+/******/ 			resolves.shift()();
+/******/ 		}
+/******/
+/******/ 	};
+/******/
+/******/
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
+/******/
+/******/ 	// object to store loaded and loading chunks
+/******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 	// Promise = chunk loading, 0 = chunk loaded
+/******/ 	var installedChunks = {
+/******/ 		3: 0
+/******/ 	};
+/******/
+/******/
+/******/
+/******/ 	// script path function
+/******/ 	function jsonpScriptSrc(chunkId) {
+/******/ 		return __webpack_require__.p + "" + ({"4":"lottie"}[chunkId]||chunkId) + "." + "39bb0bac49a4b5751acc" + ".bundle.js"
+/******/ 	}
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
@@ -26,6 +70,64 @@
 /******/ 		return module.exports;
 /******/ 	}
 /******/
+/******/ 	// This file contains only the entry chunk.
+/******/ 	// The chunk loading function for additional chunks
+/******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
+/******/ 		var promises = [];
+/******/
+/******/
+/******/ 		// JSONP chunk loading for javascript
+/******/
+/******/ 		var installedChunkData = installedChunks[chunkId];
+/******/ 		if(installedChunkData !== 0) { // 0 means "already installed".
+/******/
+/******/ 			// a Promise means "currently loading".
+/******/ 			if(installedChunkData) {
+/******/ 				promises.push(installedChunkData[2]);
+/******/ 			} else {
+/******/ 				// setup Promise in chunk cache
+/******/ 				var promise = new Promise(function(resolve, reject) {
+/******/ 					installedChunkData = installedChunks[chunkId] = [resolve, reject];
+/******/ 				});
+/******/ 				promises.push(installedChunkData[2] = promise);
+/******/
+/******/ 				// start chunk loading
+/******/ 				var script = document.createElement('script');
+/******/ 				var onScriptComplete;
+/******/
+/******/ 				script.charset = 'utf-8';
+/******/ 				script.timeout = 120;
+/******/ 				if (__webpack_require__.nc) {
+/******/ 					script.setAttribute("nonce", __webpack_require__.nc);
+/******/ 				}
+/******/ 				script.src = jsonpScriptSrc(chunkId);
+/******/
+/******/ 				onScriptComplete = function (event) {
+/******/ 					// avoid mem leaks in IE.
+/******/ 					script.onerror = script.onload = null;
+/******/ 					clearTimeout(timeout);
+/******/ 					var chunk = installedChunks[chunkId];
+/******/ 					if(chunk !== 0) {
+/******/ 						if(chunk) {
+/******/ 							var errorType = event && (event.type === 'load' ? 'missing' : event.type);
+/******/ 							var realSrc = event && event.target && event.target.src;
+/******/ 							var error = new Error('Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')');
+/******/ 							error.type = errorType;
+/******/ 							error.request = realSrc;
+/******/ 							chunk[1](error);
+/******/ 						}
+/******/ 						installedChunks[chunkId] = undefined;
+/******/ 					}
+/******/ 				};
+/******/ 				var timeout = setTimeout(function(){
+/******/ 					onScriptComplete({ type: 'timeout', target: script });
+/******/ 				}, 120000);
+/******/ 				script.onerror = script.onload = onScriptComplete;
+/******/ 				document.head.appendChild(script);
+/******/ 			}
+/******/ 		}
+/******/ 		return Promise.all(promises);
+/******/ 	};
 /******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
@@ -79,9 +181,19 @@
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
 /******/
+/******/ 	// on error function for async loading
+/******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
+/******/
+/******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
+/******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
+/******/ 	jsonpArray.push = webpackJsonpCallback;
+/******/ 	jsonpArray = jsonpArray.slice();
+/******/ 	for(var i = 0; i < jsonpArray.length; i++) webpackJsonpCallback(jsonpArray[i]);
+/******/ 	var parentJsonpFunction = oldJsonpFunction;
+/******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 11);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -675,9 +787,7 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 3 */,
-/* 4 */,
-/* 5 */
+/* 3 */
 /***/ (function(module, exports) {
 
 /*
@@ -701,101 +811,105 @@ burger.addEventListener("click", toggleNavigation);
 window.addEventListener("load", setSelectedLink);
 
 /***/ }),
-/* 6 */
-/***/ (function(module) {
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-module.exports = {"0":{"name":"Alan Evans, PhD","occupation":"James McGill Professor of Neurology and Neurosurgery, Psychiatry and Biomedical Engineering at McGill University","bio":"Professor Alan Evans is the founder of the CBRAIN project and is currently the Director of the McGill Centre of Integrative Neuroinformatics at the Neuro at McGill University, James McGill Professor of Neurology and Neurosurgery, Psychiatry and Biomedical Engineering at McGill University, and the co-director Co-Director of the Ludmer Centre for Neuroinformatics and Mental Health. He has published 581 peer-reviewed papers and has held numerous leadership roles, most notably as Director of the McConnell Brain Imaging Centre (BIC) during the 1990’s. Dr. Evans is a founding member of the International Consortium for Brain Mapping (ICBM). He was one of the founders of the Organization for Human Brain Mapping (OHBM), serving in numerous positions on the OHBM Council since 1995. He chaired the 4th International Conference on Human Brain Mapping in 1998 and is OHBM Chair for 2016-2017. In 2003 he received a CIHR Senior Scientist Award. In 2014, he was awarded the national Margolese Prize for Research into Human Brain Disorders, the Vezina Prize for Québec Neuroradiology and recognition as a Highly Cited Scientist (top 1%) for Neuroscience and Behaviour (102,816 citations, Google Scholar). In 2015, he was inducted as a Fellow of the Royal Society of Canada. He received his  PhD in biophysics at Leeds University in the UK, studying 3D protein folding. He spent 5-year at Atomic Energy of Canada, working on the physics and analysis of PET images.In 1984, he moved to the Montreal Neurological Institute (MNI) at McGill where his research interests include multi-modal brain imaging with PET and MRI,structural network modeling and large-scale brain databasing.","imageURL":"team-alan-evans.jpg"},"1":{"name":"Shawn T. Brown, PhD","occupation":"Associate Director of Research Software Development,","bio":"Dr. Brown joined the team in 2017 as  the Associate Director of Research Software Development at the McGill Centre of Integrative Neuroscience at the McGill Neurological Institute and is an expert on high-performance computing and computational simulation.  He has over 25 years of experience in developing software to support the use of high-performance computing for research in areas such as chemistry, bioinformatics, and public health. In addition to managing the CBRAIN software development, his research interests are in how agent-based modeling and other computational techniques can be used to provide decision support in public health and chronic disease.  Prior, he was the Director of Public Health Applications at the Pittsburgh Supercomputing Center, Assistant Professor of Biostatistics at the University of Pittsburgh Graduate School of Public Health, and Research Associate at Q-Chem, Inc.  He received his PhD from the University of Georgia in 2001 in Theoretical Chemistry and has authored over 100 peer-reviewed publications.","imageURL":"team-shawn.png"},"2":{"name":"Pierre Rioux","occupation":"Senior Research Platform Developer, Lead Developer","bio":"Mr. Rioux received his degree in Informatique from the Université de Montréal, and then spent 8 years working in the field of organelle genomics and phylogeny. After a stint of 4 years in California, working in turn for AT&T labs on personal networking technologies, and then for Incyte Corporation working on human genome analysis, he returned to genomics in Montréal for another 4 years. In 2008, he started working at the McGill Neurological Institute on facilitating the processing of brain images, and is now a lead developer of many of the important subsystems of the CBRAIN platform.","imageURL":"team-pr.jpg"},"3":{"name":"Natacha Beck","occupation":"Senior Research Platform Developer","bio":"Ms. Beck has been a software developer at the McGill Centre of Integrative Neuroscience at the McGill Neurological Institute since 2011 and has training and background in bioinformatics. She previously worked at the University of Montreal on genetic annotation pipelines and annotating mitochondrial genomes.  At MCIN she works on the CBRAIN platform, she works on the frontend and on the backend of the platform. She especially likes to work on tools containerization and integration. Ms. Beck received her Master of Life Science, Genetics and Informatics in 2007 from Nancy-1","imageURL":"team-nat.jpg"},"4":{"name":"Armin Taheri","occupation":"Research Visualization Developer","bio":"Mr. Taheri specializes in frontend development and transforming scientific results to advanced web-based visualizations.  On the CBRAIN team, he constructs modular frontend components that can be composed into a richer set of interactions for working with computational pipelines and datasets.  He works closely with backend developers to ensure a consistent interface between these components and CBRAIN’s Restful API.  Mr. Taheri received his Bachelor of Science in Software Engineering and Mathematics from McGill University in 2017.","imageURL":"team-armin.jpg"},"5":{"name":"Greg Kiar","occupation":"Research Platform Developer and PhD. Candidate","bio":"Greg Kiar is a PhD student in Biomedical Engineering at McGill University, where he develops software tools to lower the barrier for performing reproducible and scalable neuroscience. Greg is a strong open-science advocate, and has experience in high performance computing, neuroimaging, connectomics, and basic graph theory, statistics, and machine learning.","imageURL":"team-greg.jpg"},"6":{"name":"Serge Boroday","occupation":"Research Platform Developer","bio":"Mr. Boroday joined CBrain team in 2018. He is experienced full-stack and API developer, with past engagements ranging from Enterprise and Finance to IoT and RD projects. Serge has strong background in Computer Science and Formal Methods for Software Engineering. He received his  Master’s degree from Donetsk State University in 1993, and PhD from Saratov State University in 1998 (supervised by Dr. I.Grunky and Dr. D.Speranskii), specializing in automata theory and applications to black box testing.","imageURL":"team-serge.jpg"},"7":{"name":"Candice Czech","occupation":"Research Platform Developer","bio":"Ms Czech is a software developer at the McGill Centre of Integrative Neuroscience at the McGill Neurological Institute with a background in graphic design.  She has a passion for writing clean code and creating sleek and intuitive interfaces that improve the user experience.  She received her BA. in Education from McGill University in 2014 and has worked as a frontend developer for a design agency before returning to McGill.","imageURL":"team-candice.jpg"},"8":{"name":"Xavier Lecours","occupation":"occupation","bio":"bio","imageURL":"team-xavier.jpg"},"9":{"name":"Najmeh Khalili-Mahani","occupation":"Research Scientist","bio":"Najmeh Khalili-Mahani is a Neuroimaging scientist whose expertise range from MRI pulse sequence programing, to neuroimaging pipeline development and software validation, to pharmacological and clinical applications for large scale functional and anatomical MRI studies. She completed her Masters in Biomedical Engineering (2001, Thesis: Design and Implementation of 3D Orbital Navigator Echoes for Measurement of Rigid Body Motion in Echo Planar Magnetic Resonance Imaging, supervised by Bruce Pike), and her PhD in Neuroscience (2009, Thesis: Observing the Stressed Brain: Magnetic Resonance Imaging of the Neural Correlates of Hypthalamus Pituitary Adrenal Axis Function, jointly supervised by Drs Jens Pruessner and Alan Evans). She completed four years of post doctoral fellowship in Leiden University in the Netherlands, to develop a framework for Drug Finger-Printing for clinical studies, using resting-state  fMRI. Currently, she is jointly appointed by MCIN as a Senior Research Associate and at PERFORM Centre (Concordia University) and is in charge of technology translation for computational neuroscience research. Her current projects include: 1) Developing a simulation platform for testing the sensitivity and accuracy of morphometric studies. 2) Developing data standardization  framework for integrating ecological data from wearable biosensors with neuroimaging studies. 3) Developing gamified digital health application for ecological monitoring and intervention in chronic pain and anxiety disorders. ","imageURL":"team-naj.jpg"},"10":{"name":"Reza Adalat","occupation":"Associate Director of Operations","bio":"Reza Adalat is currently the Assoc. Director of the Operations and Senior Programs Manager at McGill Centre for Integrative Neuroscience (MCIN) at Montreal Neurological Institute (MNI) of McGill University. He has over 29 years of experience as Vice President of Operations in the telecommunications industry (1988-2003) and Director of Operations in academia (2003-2018). Prior to 1988 he worked as a precision systems architect and design engineer in the aerospace industry (1986-1988). During his tenure at McGill University, Mr. Adalat has been involved in managing projects related to neuroinformatics and information technologies for automated neuroimaging research in large-scale clinical and developmental studies. Among these projects are large multi-center, multi-million dollars, brain imaging research studies, funded by US National Institute of Health (NIH), International Consortium for Brain Mapping (ICBM), Neuroimaging InFormatics Technology Initiative (NIFTI), US Autism Centers of Excellence (ACE) Network, Canadian Institute of Health Research (CIHR), Canada Foundation for Innovation (CFI), Canada’s Advanced Research and Innovation Network (CANARIE), Canadian Brain Research And Informatics Network (CBRAIN), Helmholtz Association of German Research Centres, Canada Networks of Centres of Excellence (NeuroDevNet), National University of Singapore (NUS), The Irving Ludmer Family Foundation, Jean Coutu Family Foundation, European Commission Human Brain Project (HBP) and Brain Canada Foundation.  Reza Adalat is a multilingual, highly organized, dynamic and goal-oriented team leader, with successful interpersonal communication skills.","imageURL":"team-reza-adalat.jpg"}};
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return handleAnimations; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return loadAnimations; });
+/*
+=============================================================
+ | ANIMATIONS
+=============================================================
+*/
+var isElementInView = function isElementInView(el) {
+  var boundsEl = el.getBoundingClientRect();
+  return boundsEl.top >= 0 && boundsEl.left >= 0 && boundsEl.bottom <= (window.innerHeight || document.documentElement.clientHeight) && boundsEl.right <= (window.innerWidth || document.documentElement.clientHeight);
+};
+
+var startAnimation = function startAnimation(el) {
+  el.dataset.animate = "true";
+  __webpack_require__.e(/* import() | lottie */ 4).then(__webpack_require__.t.bind(null, 6, 7)).then(function (lottie) {
+    return lottie.play(el.id);
+  }).catch(function (err) {
+    return err;
+  });
+};
+
+var stopAnimation = function stopAnimation(el) {
+  el.dataset.animate = "false";
+  __webpack_require__.e(/* import() | lottie */ 4).then(__webpack_require__.t.bind(null, 6, 7)).then(function (lottie) {
+    return lottie.stop(el.id);
+  }).catch(function (err) {
+    return err;
+  });
+};
+
+var handleAnimations = function handleAnimations(elements) {
+  return elements.map(function (el) {
+    var is_animate = JSON.parse(el.dataset.animate);
+    var is_visible = isElementInView(el);
+
+    if (is_animate === is_visible) {
+      return null;
+    }
+
+    return is_visible ? startAnimation(el) : stopAnimation(el);
+  });
+};
+var loadAnimations = function loadAnimations(elements) {
+  var loop = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  __webpack_require__.e(/* import() | lottie */ 4).then(__webpack_require__.t.bind(null, 6, 7)).then(function (lottie) {
+    return elements.map(function (el) {
+      return lottie.loadAnimation({
+        container: el,
+        renderer: "svg",
+        path: "./assets/animations/".concat(el.id, ".json"),
+        autoplay: false,
+        loop: loop,
+        name: "".concat(el.id)
+      });
+    });
+  }).catch(function (err) {
+    return err;
+  });
+  handleAnimations(elements);
+};
 
 /***/ }),
+/* 5 */,
+/* 6 */,
 /* 7 */,
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _about_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
-/* harmony import */ var _about_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_about_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _partials_partials__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
-/* harmony import */ var _partials_partials__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_partials_partials__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _team_data_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
-var _team_data_json__WEBPACK_IMPORTED_MODULE_2___namespace = /*#__PURE__*/__webpack_require__.t(6, 1);
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9);
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _animations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _partials_partials__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
+/* harmony import */ var _partials_partials__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_partials_partials__WEBPACK_IMPORTED_MODULE_2__);
 
 
 
-
-var selected_id;
-var modal_background = document.querySelector(".modal-background");
-var modal_container = document.querySelector(".modal-container");
-
-var toggleModal = function toggleModal(e) {
-  selected_id = e.currentTarget.dataset.id;
-  var modal_els = Array.from(document.querySelectorAll("[data-modal='true']"));
-
-  if (modal_els.length > 0) {
-    modal_container.removeChild(modal_container.firstChild);
-    selected_id = "";
-    modal_els.map(function (_) {
-      _.dataset.modal = "false";
-    });
-  }
-
-  var selected_employee = document.querySelector("[data-id = \"".concat(selected_id, "\"]"));
-  var employee = selected_employee.cloneNode(true);
-  var close_icon = employee.querySelector(".employee-icon");
-  employee.dataset.modal = "true";
-  modal_background.dataset.modal = "true";
-  modal_container.dataset.modal = "true";
-  close_icon.addEventListener("click", toggleModal);
-  modal_container.appendChild(employee);
-};
-
-var loadGrid = Object.entries(_team_data_json__WEBPACK_IMPORTED_MODULE_2__).map(function (_ref, i) {
-  var _ref2 = _slicedToArray(_ref, 2),
-      k = _ref2[0],
-      v = _ref2[1];
-
-  var employee = document.querySelector(".team-employee");
-
-  if (i !== 0) {
-    employee = employee.cloneNode(true);
-  }
-
-  var grid_el = document.querySelector(".team-grid");
-  var employee_img = employee.querySelector(".employee-img");
-  var employee_name = employee.querySelector(".employee-name");
-  var employee_occupation = employee.querySelector(".employee-occupation");
-  var employee_bio = employee.querySelector(".bio-text");
-
-  __webpack_require__(14);
-
-  employee_img.style.backgroundImage = "url('./assets/team/".concat(v.imageURL, "')");
-  employee_name.textContent = "".concat(v.name);
-  employee_occupation.textContent = "".concat(v.occupation);
-  employee_bio.textContent = "".concat(v.bio);
-  employee.dataset.id = i;
-  employee.dataset.modal = "false";
-  employee.addEventListener("click", toggleModal);
-  return grid_el.appendChild(employee);
+var animations = Array.from(document.querySelectorAll(".animation"));
+window.addEventListener("load", function () {
+  return Object(_animations__WEBPACK_IMPORTED_MODULE_1__[/* loadAnimations */ "b"])(animations);
 });
-window.addEventListener("load", loadGrid);
-modal_background.addEventListener("click", toggleModal);
+window.addEventListener("scroll", function () {
+  return Object(_animations__WEBPACK_IMPORTED_MODULE_1__[/* handleAnimations */ "a"])(animations);
+});
+window.addEventListener("resize", function () {
+  return Object(_animations__WEBPACK_IMPORTED_MODULE_1__[/* handleAnimations */ "a"])(animations);
+});
 
 /***/ }),
-/* 12 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(13);
+var content = __webpack_require__(10);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -816,7 +930,7 @@ if(content.locals) module.exports = content.locals;
 if(false) {}
 
 /***/ }),
-/* 13 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -825,40 +939,6 @@ exports.push([module.i, "", ""]);
 
 
 
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var map = {
-	"./team-shawn.png": 15
-};
-
-
-function webpackContext(req) {
-	var id = webpackContextResolve(req);
-	return __webpack_require__(id);
-}
-function webpackContextResolve(req) {
-	if(!__webpack_require__.o(map, req)) {
-		var e = new Error("Cannot find module '" + req + "'");
-		e.code = 'MODULE_NOT_FOUND';
-		throw e;
-	}
-	return map[req];
-}
-webpackContext.keys = function webpackContextKeys() {
-	return Object.keys(map);
-};
-webpackContext.resolve = webpackContextResolve;
-module.exports = webpackContext;
-webpackContext.id = 14;
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "assets/team/team-shawn.png";
-
 /***/ })
 /******/ ]);
-//# sourceMappingURL=about.18c08c8aaf6155b83d61.bundle.js.map
+//# sourceMappingURL=index.39bb0bac49a4b5751acc.bundle.js.map

@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 16);
+/******/ 	return __webpack_require__(__webpack_require__.s = 14);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -675,7 +675,30 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 3 */,
+/* 3 */
+/***/ (function(module, exports) {
+
+/*
+ ============================================================
+ | NAVIGATION BAR
+ ============================================================
+*/
+var setSelectedLink = function setSelectedLink() {
+  var selection = window.location.pathname.split("/")[1].split(".")[0];
+  var selected_link = document.querySelector("[data-page='".concat(selection, "']"));
+  selected_link.dataset.selected = true;
+};
+
+var toggleNavigation = function toggleNavigation() {
+  var nav = document.querySelector(".nav");
+  return nav.dataset.open === "false" ? nav.setAttribute("data-open", "true") : nav.setAttribute("data-open", "false");
+};
+
+var burger = document.querySelector(".burger");
+burger.addEventListener("click", toggleNavigation);
+window.addEventListener("load", setSelectedLink);
+
+/***/ }),
 /* 4 */,
 /* 5 */,
 /* 6 */,
@@ -691,17 +714,17 @@ module.exports = {"0":{"icon":"mcin.png","title":"McGill Centre for Integrative 
 /* 11 */,
 /* 12 */,
 /* 13 */,
-/* 14 */,
-/* 15 */,
-/* 16 */
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _projects_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(17);
+/* harmony import */ var _projects_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(15);
 /* harmony import */ var _projects_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_projects_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _projects_data_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
-var _projects_data_json__WEBPACK_IMPORTED_MODULE_1___namespace = /*#__PURE__*/__webpack_require__.t(7, 1);
+/* harmony import */ var _partials_partials__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
+/* harmony import */ var _partials_partials__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_partials_partials__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _projects_data_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
+var _projects_data_json__WEBPACK_IMPORTED_MODULE_2___namespace = /*#__PURE__*/__webpack_require__.t(7, 1);
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -713,25 +736,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var toggleProjectContent = function toggleProjectContent(e) {
-  var selected_els = Array.from(document.querySelectorAll("[data-selected = 'true']"));
-  var parent_el = e.currentTarget.parentElement;
 
-  if (!parent_el.dataset.selected || parent_el.dataset.selected === "false") {
-    selected_els.map(function (_) {
-      _.dataset.selected = "false";
-    });
-    parent_el.dataset.selected = "true";
-  } else {
-    parent_el.dataset.selected = "false";
-  }
-
-  showContent();
-};
-
-var showContent = function showContent() {
-  var projects = Array.from(document.querySelectorAll(".project"));
-  projects.map(function (_) {
+var loadContent = function loadContent() {
+  Array.from(document.querySelectorAll(".project")).map(function (_) {
     var content_el = _.querySelector(".project-content");
 
     var description_el = _.querySelector(".project-content-text");
@@ -744,13 +751,31 @@ var showContent = function showContent() {
       content_el.style.height = "".concat(description_height, "px");
       description_el.style.marginTop = "".concat(0, "px");
     }
+
+    return null;
   });
+};
+
+var toggleProjectContent = function toggleProjectContent(e) {
+  var parent_el = e.currentTarget.parentElement;
+
+  if (!parent_el.dataset.selected || parent_el.dataset.selected === "false") {
+    Array.from(document.querySelectorAll("[data-selected = 'true']")).map(function (_) {
+      _.dataset.selected = "false";
+      return null;
+    });
+    parent_el.dataset.selected = "true";
+  } else {
+    parent_el.dataset.selected = "false";
+  }
+
+  loadContent();
 };
 
 var loadData = function loadData() {
   var projects_section = document.querySelector(".projects-section");
   var project = document.querySelector(".project");
-  Object.entries(_projects_data_json__WEBPACK_IMPORTED_MODULE_1__).map(function (_ref, i) {
+  Object.entries(_projects_data_json__WEBPACK_IMPORTED_MODULE_2__).map(function (_ref, i) {
     var _ref2 = _slicedToArray(_ref, 2),
         k = _ref2[0],
         v = _ref2[1];
@@ -766,21 +791,21 @@ var loadData = function loadData() {
     project.querySelector(".project-content-description").textContent = "".concat(v.description);
     project.querySelector(".project-card").addEventListener("click", toggleProjectContent);
     project.dataset.selected = "false";
-    projects_section.appendChild(project);
+    return projects_section.appendChild(project);
   });
-  showContent();
+  loadContent();
 };
 
 window.addEventListener("load", loadData);
-window.addEventListener("load", showContent);
-window.addEventListener("resize", showContent);
+window.addEventListener("load", loadContent);
+window.addEventListener("resize", loadContent);
 
 /***/ }),
-/* 17 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(18);
+var content = __webpack_require__(16);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -801,7 +826,7 @@ if(content.locals) module.exports = content.locals;
 if(false) {}
 
 /***/ }),
-/* 18 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -812,4 +837,4 @@ exports.push([module.i, "", ""]);
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=projects.18c08c8aaf6155b83d61.bundle.js.map
+//# sourceMappingURL=projects.39bb0bac49a4b5751acc.bundle.js.map

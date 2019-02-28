@@ -63,6 +63,7 @@
         .resource-card {
           @extend .card;
           padding: 1rem;
+          text-decoration: none;
           .resource-card-img {
             @extend .card-img;
             padding: 0;

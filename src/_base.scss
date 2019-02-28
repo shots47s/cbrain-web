@@ -21,6 +21,8 @@ $NAV-HEIGHT: 3.75;
 $MODAL-WIDTH: 45;
 $MODAL-HEIGHT: 32;
 
+$CLOSE_ICON_WIDTH : 2.5;
+
 .background-white {
   background-color: $COLOR-WHITE;
 }
@@ -188,6 +190,32 @@ $MODAL-HEIGHT: 32;
   @include button-default($COLOR-PRUSSIAN,$COLOR-WHITE, transparent, $COLOR-PRUSSIAN, $COLOR-PRUSSIAN);
 }
 
+.button-close {
+  @extend .button-filled;
+  width: $CLOSE_ICON_WIDTH + rem;
+  height: $CLOSE_ICON_WIDTH + rem;
+  padding: 0;
+  font-size: 1.5rem;
+  font-weight: 300;
+  box-shadow: 1px 1px 8px -3px  $COLOR-CBRAIN;
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  border-radius: 50%;
+  z-index: 1;
+  &:before {
+    content: "";
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0%;
+    bottom: 0;
+    right: 100%;
+    opacity: 0;
+    transition: 0.3s all linear;
+  }
+}
+
 /*
 =============================================================
 | CARDS
@@ -278,7 +306,7 @@ body {
   height: 100vh;
   padding-top: $NAV-HEIGHT + rem;
   display: flex;
-  flex-wrap: wrap
+  flex-wrap: wrap;
 }
 
 
@@ -420,7 +448,6 @@ body {
 */
 
 .partnership {
-  @extend .text-subtitle;
   align-self: flex-end;
   width: 100%;
   background-color: $COLOR-WILD-SAND;
@@ -428,6 +455,8 @@ body {
   padding: $MARGIN * 2 + rem;
   margin-top: 3rem;
   .partnership-text {
+    @extend .text-subtitle;
+    font-weight: 400;
     width: 100%;
   }
   .partnership-icons {

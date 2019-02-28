@@ -40,13 +40,41 @@
         </div>
         <div class="team-grid">
           <div class="modal-background" data-modal="false"></div>
-          <div class="modal-container" data-modal="false"></div>
+          <div class="modal-container" data-modal="false">
+            <div class="modal-employee">
+              <div class="employee-button">
+                <img
+                  class="employee-icon"
+                  src="./assets/icons/icon-close.png"
+                />
+              </div>
+              <div class="employee-details">
+                <div class="employee-img-wrapper">
+                  <div class="employee-img"></div>
+                </div>
+                <div class="employee-information">
+                  <div class="employee-name"></div>
+                  <div class="employee-border"></div>
+                  <div class="employee-occupation"></div>
+                </div>
+                <div class="employee-links"></div>
+              </div>
+              <div class="employee-bio-wrapper">
+                <div class="employee-bio"><div class="bio-text"></div></div>
+              </div>
+            </div>
+          </div>
           <div class="team-employee" data-modal="false">
             <div class="employee-details">
               <div class="employee-img-wrapper">
                 <div class="employee-img-border">
                   <div class="employee-img"></div>
-                  <div class="employee-icon">+</div>
+                  <div class="employee-button">
+                    <img
+                      class="employee-icon"
+                      src="./assets/icons/icon-close.png"
+                    />
+                  </div>
                 </div>
               </div>
               <div class="employee-description">
@@ -60,6 +88,39 @@
             </div>
           </div>
         </div>
+        <div class="team-grid affiliate-grid">
+          <div class="team-heading">
+            Affiliated Team Members
+            <div class="team-description">This is a blurb about team work.</div>
+          </div>
+          <div class="modal-background" data-modal="false"></div>
+          <div class="modal-container" data-modal="false">
+            <div class="modal-employee">
+              <div class="employee-button">
+                <img
+                  class="employee-icon"
+                  src="./assets/icons/icon-close.png"
+                />
+              </div>
+              <div class="employee-details">
+                <div class="employee-img-wrapper">
+                  <div class="employee-img"></div>
+                </div>
+                <div class="employee-information">
+                  <div class="employee-name"></div>
+                  <div class="employee-border"></div>
+                  <div class="employee-occupation"></div>
+                </div>
+                <div class="employee-links"></div>
+              </div>
+              <div class="employee-bio-wrapper">
+                <div class="employee-bio"><div class="bio-text"></div></div>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+
       </section>
     </div>
     <%= require('html-loader!../partials/footer.html') %>

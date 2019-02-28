@@ -2,53 +2,70 @@ import "./about.scss";
 import "../partials/partials";
 import teamData from "../team-data.json";
 
-let selected_id;
-const modal_background = document.querySelector(".modal-background");
-const modal_container = document.querySelector(".modal-container");
-
-const toggleModal = (e) => {
-  selected_id = e.currentTarget.dataset.id;
-  const modal_els = Array.from(document.querySelectorAll("[data-modal='true']"));
-
-  if (modal_els.length > 0) {
-    modal_container.removeChild(modal_container.firstChild);
-    selected_id = "";
-    modal_els.map((_) => {
-      _.dataset.modal = "false";
+const loadEmployeeDetails = (id, modal, employee_el) => {
+  if (modal === "true") {
+    const links_el = document.querySelector(".employee-links");
+    while (links_el.firstChild) {
+      links_el.removeChild(links_el.firstChild);
+    }
+    employee_el.querySelector(".bio-text").textContent = `${teamData[id].bio}`;
+    Object.entries(teamData[id].links).map(([k, v]) => {
+      const link_el = document.createElement("a");
+      link_el.setAttribute("class", "employee-link");
+      link_el.textContent = `${k}`;
+      link_el.href = `${v}`;
+      links_el.appendChild(link_el);
     });
   }
-  const selected_employee = document.querySelector(`[data-id = "${selected_id}"]`);
-  const employee = selected_employee.cloneNode(true);
-  const close_icon = employee.querySelector(".employee-icon");
-  employee.dataset.modal = "true";
-  modal_background.dataset.modal = "true";
-  modal_container.dataset.modal = "true";
-  close_icon.addEventListener("click", toggleModal);
-  modal_container.appendChild(employee);
+  employee_el.querySelector(".employee-name").textContent = `${teamData[id].name}`;
+  employee_el.querySelector(".employee-occupation").textContent = `${teamData[id].occupation}`;
+  employee_el.querySelector(".employee-img").style.backgroundImage =  `url('./assets/team/${teamData[id].imageURL}')`;
 };
 
-const loadGrid = Object.entries(teamData).map(([k, v], i) => {
+
+const toggleModal = (e) => {
+  const modal_container = document.querySelector(".modal-container");
+  const modal_background = document.querySelector(".modal-background");
+  if (e.currentTarget.dataset.modal === "false") {
+    const modal_employee = modal_container.querySelector(".modal-employee");
+    const modal_close = modal_employee.querySelector(".employee-button");
+
+    document.body.dataset.modal    = "true";
+    modal_employee.dataset.modal   = "true";
+    modal_background.dataset.modal = "true";
+    modal_container.dataset.modal  = "true";
+
+    modal_close.addEventListener("click", toggleModal);
+    modal_background.addEventListener("click", toggleModal);
+
+    loadEmployeeDetails(e.currentTarget.dataset.id, modal_employee.dataset.modal, modal_employee);
+    return modal_container.appendChild(modal_employee);
+  }
+
+  Array.from(document.querySelectorAll("[data-modal='true']")).map((_) => {
+    _.dataset.modal = "false";
+    return null;
+  });
+};
+
+
+const loadEmployee = Object.entries(teamData).map(([k, v], i) => {
+  const grid_el = document.querySelector(".team-grid");
+  const affiliate_grid_el = document.querySelector(".affiliate-grid");
   let employee = document.querySelector(".team-employee");
   if (i !== 0) {
     employee = employee.cloneNode(true);
   }
-  const grid_el = document.querySelector(".team-grid");
-  const employee_img = employee.querySelector(".employee-img");
-  const employee_name = employee.querySelector(".employee-name");
-  const employee_occupation = employee.querySelector(".employee-occupation");
-  const employee_bio = employee.querySelector(".bio-text");
-  require.context("../assets/team", true, /\.(png|jpeg|svg)$/);
-  employee_img.style.backgroundImage =  `url('./assets/team/${v.imageURL}')`;
-  employee_name.textContent = `${v.name}`;
-  employee_occupation.textContent = `${v.occupation}`;
-  employee_bio.textContent = `${v.bio}`;
-
   employee.dataset.id = i;
   employee.dataset.modal = "false";
   employee.addEventListener("click", toggleModal);
-  return grid_el.appendChild(employee);
+  if (v.affiliated === true) {
+    affiliate_grid_el.appendChild(employee);
+  } else {
+    grid_el.appendChild(employee);
+  }
+  return loadEmployeeDetails(i, employee.dataset.modal, employee);
 });
 
 
-window.addEventListener("load", loadGrid);
-modal_background.addEventListener("click", toggleModal);
+window.addEventListener("load", loadEmployee);

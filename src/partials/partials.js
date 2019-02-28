@@ -7,7 +7,9 @@
 const setSelectedLink = () => {
   const selection = window.location.pathname.split("/")[1].split(".")[0];
   const selected_link = document.querySelector(`[data-page='${selection}']`);
-  selected_link.dataset.selected = true;
+  if (selected_link) {
+    selected_link.dataset.selected = true;
+  }
 };
 
 const toggleNavigation = () => {

@@ -14,7 +14,7 @@ const loadEmployeeDetails = (id, modal, employee_el) => {
       link_el.setAttribute("class", "employee-link");
       link_el.textContent = `${k}`;
       link_el.href = `${v}`;
-      links_el.appendChild(link_el);
+      return links_el.appendChild(link_el);
     });
   }
   employee_el.querySelector(".employee-name").textContent = `${teamData[id].name}`;
@@ -42,14 +42,14 @@ const toggleModal = (e) => {
     return modal_container.appendChild(modal_employee);
   }
 
-  Array.from(document.querySelectorAll("[data-modal='true']")).map((_) => {
+  return Array.from(document.querySelectorAll("[data-modal='true']")).map((_) => {
     _.dataset.modal = "false";
     return null;
   });
 };
 
 
-const loadEmployee = Object.entries(teamData).map(([k, v], i) => {
+const loadEmployee = Object.entries(teamData).map((v, i) => {
   const grid_el = document.querySelector(".team-grid");
   const affiliate_grid_el = document.querySelector(".affiliate-grid");
   let employee = document.querySelector(".team-employee");

@@ -207,12 +207,25 @@ $CLOSE_ICON_WIDTH : 2.5;
     content: "";
     border-radius: 50%;
     position: absolute;
-    top: 0;
+    width: 0;
+    top: 50%;
     left: 0%;
-    bottom: 0;
+    bottom: 50%;
     right: 100%;
     opacity: 0;
-    transition: 0.3s all linear;
+    transition: 0.2s all linear;
+  }
+}
+
+.button-close-hover {
+  &:before {
+    width: 100%;
+    right: 0;
+    top: 0;
+    bottom:0;
+    opacity: 1;
+    transform: translate(0%,0);
+    transition: 0.2s all linear;
   }
 }
 
@@ -371,6 +384,9 @@ body {
           color: $COLOR_WHITE;
           transition:  all 0.2s ease-in-out;
         }
+        &[data-page="login"]{
+          display: none;
+        }
       }
      }
     .burger {
@@ -392,7 +408,7 @@ body {
         display:none;
       }
       .login {
-        height: 100%;
+        display: none;
       }
       .burger {
         display: block;
@@ -425,20 +441,14 @@ body {
            &:hover {
              background-color: $COLOR-CBRAIN;
            }
+           &[data-page="login"]{
+             display: block;
+           }
          }
        }
      }
     }
   }
-
-  @include breakpoint(mobile) {
-    .bar {
-      .login {
-        padding:$PADDING / 2 + rem $PADDING * 2 + rem;
-      }
-    }
-  }
-  
 }
 
 /*

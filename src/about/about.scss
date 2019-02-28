@@ -142,9 +142,13 @@ $EMPLOYEE_IMG : 8;
               @extend .circle-spin-hover;
               .employee-button {
                 &:before {
+                  width: 100%;
                   right: 0;
+                  top: 0;
+                  bottom:0;
                   opacity: 1;
-                  transform: translate(0%,0)
+                  transform: translate(0%,0);
+                  transition: 0.2s all linear;
                 }
               }
             }
@@ -335,6 +339,9 @@ body[data-modal="true"] {
               display: flex;
               align-items:center;
               justify-content: center;
+              &:hover {
+                @extend .button-close-hover;
+              }
               .employee-icon {
                 width: 0.75rem;
                 height: 0.75rem;
@@ -446,7 +453,7 @@ body[data-modal="true"] {
           height: 100%;
           top: 0;
           left: 0;
-          padding-bottom: $CLOSE_ICON_WIDTH + rem;
+          padding-bottom: $CLOSE_ICON_WIDTH * 2 + rem;
           transform: translate(0,0);
           .modal-employee[data-modal="true"] {
             overflow-y: scroll;

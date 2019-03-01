@@ -1,6 +1,50 @@
 /******/ (function(modules) { // webpackBootstrap
+/******/ 	// install a JSONP callback for chunk loading
+/******/ 	function webpackJsonpCallback(data) {
+/******/ 		var chunkIds = data[0];
+/******/ 		var moreModules = data[1];
+/******/
+/******/
+/******/ 		// add "moreModules" to the modules object,
+/******/ 		// then flag all "chunkIds" as loaded and fire callback
+/******/ 		var moduleId, chunkId, i = 0, resolves = [];
+/******/ 		for(;i < chunkIds.length; i++) {
+/******/ 			chunkId = chunkIds[i];
+/******/ 			if(installedChunks[chunkId]) {
+/******/ 				resolves.push(installedChunks[chunkId][0]);
+/******/ 			}
+/******/ 			installedChunks[chunkId] = 0;
+/******/ 		}
+/******/ 		for(moduleId in moreModules) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if(parentJsonpFunction) parentJsonpFunction(data);
+/******/
+/******/ 		while(resolves.length) {
+/******/ 			resolves.shift()();
+/******/ 		}
+/******/
+/******/ 	};
+/******/
+/******/
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
+/******/
+/******/ 	// object to store loaded and loading chunks
+/******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 	// Promise = chunk loading, 0 = chunk loaded
+/******/ 	var installedChunks = {
+/******/ 		3: 0
+/******/ 	};
+/******/
+/******/
+/******/
+/******/ 	// script path function
+/******/ 	function jsonpScriptSrc(chunkId) {
+/******/ 		return __webpack_require__.p + "" + ({"4":"lottie"}[chunkId]||chunkId) + "." + "6c3f80fc21a3563711e8" + ".bundle.js"
+/******/ 	}
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
@@ -26,6 +70,64 @@
 /******/ 		return module.exports;
 /******/ 	}
 /******/
+/******/ 	// This file contains only the entry chunk.
+/******/ 	// The chunk loading function for additional chunks
+/******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
+/******/ 		var promises = [];
+/******/
+/******/
+/******/ 		// JSONP chunk loading for javascript
+/******/
+/******/ 		var installedChunkData = installedChunks[chunkId];
+/******/ 		if(installedChunkData !== 0) { // 0 means "already installed".
+/******/
+/******/ 			// a Promise means "currently loading".
+/******/ 			if(installedChunkData) {
+/******/ 				promises.push(installedChunkData[2]);
+/******/ 			} else {
+/******/ 				// setup Promise in chunk cache
+/******/ 				var promise = new Promise(function(resolve, reject) {
+/******/ 					installedChunkData = installedChunks[chunkId] = [resolve, reject];
+/******/ 				});
+/******/ 				promises.push(installedChunkData[2] = promise);
+/******/
+/******/ 				// start chunk loading
+/******/ 				var script = document.createElement('script');
+/******/ 				var onScriptComplete;
+/******/
+/******/ 				script.charset = 'utf-8';
+/******/ 				script.timeout = 120;
+/******/ 				if (__webpack_require__.nc) {
+/******/ 					script.setAttribute("nonce", __webpack_require__.nc);
+/******/ 				}
+/******/ 				script.src = jsonpScriptSrc(chunkId);
+/******/
+/******/ 				onScriptComplete = function (event) {
+/******/ 					// avoid mem leaks in IE.
+/******/ 					script.onerror = script.onload = null;
+/******/ 					clearTimeout(timeout);
+/******/ 					var chunk = installedChunks[chunkId];
+/******/ 					if(chunk !== 0) {
+/******/ 						if(chunk) {
+/******/ 							var errorType = event && (event.type === 'load' ? 'missing' : event.type);
+/******/ 							var realSrc = event && event.target && event.target.src;
+/******/ 							var error = new Error('Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')');
+/******/ 							error.type = errorType;
+/******/ 							error.request = realSrc;
+/******/ 							chunk[1](error);
+/******/ 						}
+/******/ 						installedChunks[chunkId] = undefined;
+/******/ 					}
+/******/ 				};
+/******/ 				var timeout = setTimeout(function(){
+/******/ 					onScriptComplete({ type: 'timeout', target: script });
+/******/ 				}, 120000);
+/******/ 				script.onerror = script.onload = onScriptComplete;
+/******/ 				document.head.appendChild(script);
+/******/ 			}
+/******/ 		}
+/******/ 		return Promise.all(promises);
+/******/ 	};
 /******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
@@ -79,14 +181,23 @@
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
 /******/
+/******/ 	// on error function for async loading
+/******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
+/******/
+/******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
+/******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
+/******/ 	jsonpArray.push = webpackJsonpCallback;
+/******/ 	jsonpArray = jsonpArray.slice();
+/******/ 	for(var i = 0; i < jsonpArray.length; i++) webpackJsonpCallback(jsonpArray[i]);
+/******/ 	var parentJsonpFunction = oldJsonpFunction;
+/******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 21);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 0:
+/******/ ([
+/* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -177,8 +288,7 @@ function toComment(sourceMap) {
 }
 
 /***/ }),
-
-/***/ 1:
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -582,8 +692,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-
-/***/ 2:
+/* 2 */
 /***/ (function(module, exports) {
 
 
@@ -678,71 +787,7 @@ module.exports = function (css) {
 
 
 /***/ }),
-
-/***/ 21:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _get_started_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(22);
-/* harmony import */ var _get_started_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_get_started_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _partials_partials__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
-/* harmony import */ var _partials_partials__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_partials_partials__WEBPACK_IMPORTED_MODULE_1__);
-
-
-
-var selectResource = function selectResource(e) {
-  var resource_els = Array.from(document.querySelectorAll("[data-option]"));
-  return resource_els.map(function (_) {
-    _.dataset.option === e.currentTarget.dataset.option ? _.dataset.selected = "true" : _.dataset.selected = "false";
-    return null;
-  });
-};
-
-Array.from(document.querySelectorAll(".resource-option")).map(function (_) {
-  return _.addEventListener("click", selectResource);
-});
-
-/***/ }),
-
-/***/ 22:
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(23);
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(1)(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
-/***/ 23:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(0)(false);
-// Module
-exports.push([module.i, "", ""]);
-
-
-
-/***/ }),
-
-/***/ 3:
+/* 3 */
 /***/ (function(module, exports) {
 
 /*
@@ -768,7 +813,135 @@ var burger = document.querySelector(".burger");
 burger.addEventListener("click", toggleNavigation);
 window.addEventListener("load", setSelectedLink);
 
-/***/ })
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-/******/ });
-//# sourceMappingURL=getStarted.bc07fbfcf07f1d2f5f8b.bundle.js.map
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return handleAnimations; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return loadAnimations; });
+/*
+=============================================================
+ | ANIMATIONS
+=============================================================
+*/
+var isElementInView = function isElementInView(el) {
+  var boundsEl = el.getBoundingClientRect();
+  return boundsEl.top >= 0 && boundsEl.left >= 0 && boundsEl.bottom <= (window.innerHeight || document.documentElement.clientHeight) && boundsEl.right <= (window.innerWidth || document.documentElement.clientHeight);
+};
+
+var startAnimation = function startAnimation(el) {
+  el.dataset.animate = "true";
+  __webpack_require__.e(/* import() | lottie */ 4).then(__webpack_require__.t.bind(null, 6, 7)).then(function (lottie) {
+    return lottie.play(el.id);
+  }).catch(function (err) {
+    return err;
+  });
+};
+
+var stopAnimation = function stopAnimation(el) {
+  el.dataset.animate = "false";
+  __webpack_require__.e(/* import() | lottie */ 4).then(__webpack_require__.t.bind(null, 6, 7)).then(function (lottie) {
+    return lottie.stop(el.id);
+  }).catch(function (err) {
+    return err;
+  });
+};
+
+var handleAnimations = function handleAnimations(elements) {
+  return elements.map(function (el) {
+    var is_animate = JSON.parse(el.dataset.animate);
+    var is_visible = isElementInView(el);
+
+    if (is_animate === is_visible) {
+      return null;
+    }
+
+    return is_visible ? startAnimation(el) : stopAnimation(el);
+  });
+};
+var loadAnimations = function loadAnimations(elements) {
+  var loop = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  __webpack_require__.e(/* import() | lottie */ 4).then(__webpack_require__.t.bind(null, 6, 7)).then(function (lottie) {
+    return elements.map(function (el) {
+      return lottie.loadAnimation({
+        container: el,
+        renderer: "svg",
+        path: "./assets/animations/".concat(el.id, ".json"),
+        autoplay: false,
+        loop: loop,
+        name: "".concat(el.id)
+      });
+    });
+  }).catch(function (err) {
+    return err;
+  });
+  handleAnimations(elements);
+};
+
+/***/ }),
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9);
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _animations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _partials_partials__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
+/* harmony import */ var _partials_partials__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_partials_partials__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+var animations = Array.from(document.querySelectorAll(".animation"));
+window.addEventListener("load", function () {
+  return Object(_animations__WEBPACK_IMPORTED_MODULE_1__[/* loadAnimations */ "b"])(animations);
+});
+window.addEventListener("scroll", function () {
+  return Object(_animations__WEBPACK_IMPORTED_MODULE_1__[/* handleAnimations */ "a"])(animations);
+});
+window.addEventListener("resize", function () {
+  return Object(_animations__WEBPACK_IMPORTED_MODULE_1__[/* handleAnimations */ "a"])(animations);
+});
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(10);
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(1)(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(false);
+// Module
+exports.push([module.i, "", ""]);
+
+
+
+/***/ })
+/******/ ]);
+//# sourceMappingURL=index.6c3f80fc21a3563711e8.bundle.js.map

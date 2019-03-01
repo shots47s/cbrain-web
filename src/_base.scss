@@ -479,6 +479,9 @@ body {
     .partnership-icon {
       width: 6.25rem;
       margin: 0px $MARGIN + rem;
+      img {
+        width: 100%;
+      }
     }
   }
   @include breakpoint(tablet) {
@@ -490,11 +493,17 @@ body {
       align-items: center;
       justify-content: center;
       flex-wrap: wrap;
+      margin: 0;
       .partnership-icon {
         width: none;
         height: none;
         margin: 1rem 1rem;
       }
+    }
+  }
+  @include breakpoint(mobile) {
+    .partnership-icons {
+      flex-direction: column;
     }
   }
 }

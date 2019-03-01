@@ -9,6 +9,7 @@ const isElementInView = (el) => {
   const boundsEl = el.getBoundingClientRect();
   return (
     boundsEl.top >= 0
+    && boundsEl.top <= (window.innerHeight / 2 || document.documentElement.clientHeight / 2)
     && boundsEl.left >= 0
     && boundsEl.bottom <= (window.innerHeight || document.documentElement.clientHeight)
     && boundsEl.right <= (window.innerWidth || document.documentElement.clientHeight)

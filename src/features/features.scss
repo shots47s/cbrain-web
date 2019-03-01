@@ -7,23 +7,19 @@
 */
 
 .features {
+  margin-bottom: 3rem;
   .feature {
-    padding: 4rem 9rem;
-    .feature-headline {
-      @extend .text-heading;
-      text-align: right;
-    }
+    padding: 6rem 8%;
     .feature-content {
       @extend .text;
-      margin-top: $MARGIN + rem;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       align-items: center;
       .feature-img {
         @extend .background-black-squeeze;
-        width: 250px;
-        height: 250px;
+        width: $ANIMATION-WIDTH + rem;
+        height: $ANIMATION-WIDTH + rem;
         border-radius: 4px;
         align-self: center;
         margin-right: 2rem;
@@ -38,17 +34,18 @@
         flex: 1 1 50%;
         margin-left: 2rem;
         text-align: justify;
+        .feature-headline {
+          @extend .text-heading;
+          text-align: right;
+          margin-bottom: 2rem;
+        }
         p {
           margin-bottom: 1rem;
         }
-
       }
     }
     &.reversed {
       @extend .background-black-squeeze;
-      .feature-headline {
-        text-align: left;
-      }
       .feature-content {
         flex-direction: row-reverse;
         .feature-img {
@@ -59,34 +56,41 @@
         .feature-paragraph {
           margin-left: 0;
           margin-right: 2rem;
+          .feature-headline {
+            text-align: left;
+          }
+
         }
       }
     }
   }
   @include breakpoint(desktop_large) {
     .feature {
+      padding: 4rem 20%;
+    }
+  }
+  @include breakpoint(desktop_xlarge) {
+    .feature {
       padding: 4rem 25%;
-
     }
   }
   @include breakpoint(tablet) {
     .feature {
       padding: 4rem 2rem;
-      .feature-headline {
-        text-align:center;
-      }
       .feature-content {
         .feature-img {
           margin-right: 1rem;
         }
         .feature-paragraph {
           margin-left: 1rem;
+          margin-top: 2rem;
+          .feature-headline {
+            text-align: center;
+            margin-bottom: 1rem;
+          }
         }
       }
       &.reversed {
-        .feature-headline {
-          text-align: center;
-        }
         .feature-content {
           .feature-img {
             margin-left: 1rem;
@@ -95,6 +99,9 @@
           .feature-paragraph {
             margin-left: 0;
             margin-right: 1rem;
+            .feature-headline {
+              text-align: center;
+            }
           }
           flex: 1 1 100%;
         }
@@ -109,7 +116,6 @@
         .feature-img {
           margin-left: 0;
           margin-right: 0;
-          margin: 2rem 0;
         }
         .feature-paragraph {
           margin-left: 0;

@@ -464,7 +464,7 @@ body {
   background-color: $COLOR-WILD-SAND;
   text-transform: uppercase;
   padding: $MARGIN * 2 + rem;
-  margin-top: 3rem;
+  border-top: 2px solid $COLOR-WHITE;
   .partnership-text {
     @extend .text-subtitle;
     font-weight: 400;
@@ -473,6 +473,9 @@ body {
   .partnership-icons {
     width: 100%;
     margin: $MARGIN * 2 + rem 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
     .partnership-icon {
       width: 6.25rem;
       margin: 0px $MARGIN + rem;

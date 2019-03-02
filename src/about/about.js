@@ -49,7 +49,7 @@ const toggleModal = (e) => {
 };
 
 
-const loadEmployee = Object.entries(teamData).map((v, i) => {
+const loadEmployee = Object.entries(teamData).map(([k, v], i) => {
   const grid_el = document.querySelector(".team-grid");
   const affiliate_grid_el = document.querySelector(".affiliate-grid");
   let employee = document.querySelector(".team-employee");

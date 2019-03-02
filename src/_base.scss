@@ -375,7 +375,8 @@ body {
       .login {
         @extend .button-outlined,.text-nav;
         border:none;
-        padding: 0rem $PADDING * 3.5 + rem;
+        border-left: 2px solid $COLOR-CBRAIN;
+        padding: $PADDING + rem $PADDING * 5 + rem;
         color:rgba(255,255,255,0.6);
         font-weight: 300;
         box-shadow: none;
@@ -439,6 +440,7 @@ body {
          }
          .login {
            padding: $PADDING * 2 + rem;
+           border-left: none;
            &:before {
              background-color: transparent;
            }
@@ -472,10 +474,10 @@ body {
     margin: $MARGIN * 2 + rem 0px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     .partnership-icon {
       width: 6.25rem;
-      margin: 0px $MARGIN + rem;
+      margin: 0px $MARGIN * 2+ rem;
       img {
         width: 100%;
       }

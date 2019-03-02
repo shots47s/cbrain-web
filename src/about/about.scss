@@ -30,11 +30,12 @@ $EMPLOYEE_IMG : 8;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 2rem;
+      padding: 3.5rem;
       .contact-information-text {
-        font-weight: 300;
-        line-height: 1.75rem;
         padding-left: 4rem;
+        font-size: 1.3rem;
+        line-height: 1.8rem;
+        font-weight: 300;
       }
       .contact-information-border {
         background-color: $COLOR-PRUSSIAN;
@@ -65,12 +66,14 @@ $EMPLOYEE_IMG : 8;
         top: 0;
         width: 50%;
         .contact-heading-text {
-          text-align: unset;
+          width: 100%;
         }
       }
       .contact-information {
+        padding: 2rem;
         .contact-information-text {
           padding-left: 0rem;
+          font-size: 1rem;
         }
       }
       .contact-img-wrapper {
@@ -135,6 +138,7 @@ $EMPLOYEE_IMG : 8;
       .team-employee {
         flex: 0 1 25rem;
         padding: 1rem;
+        cursor:pointer;
         text-align: center;
         &[data-modal="false"] {
           .employee-details:hover {
@@ -268,6 +272,7 @@ $EMPLOYEE_IMG : 8;
         .team-employee {
           flex: 0 1 100%;
           .employee-details {
+            pointer-events:none;
             .employee-img-wrapper {
               .employee-img-border {
                 .employee-button {

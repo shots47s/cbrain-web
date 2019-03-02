@@ -31,7 +31,8 @@
         }
         .banner-description-paragraph {
           @extend .text-banner;
-          color: $COLOR-WHITE;
+          color: $COLOR-PRUSSIAN;
+          line-height: 1.7rem;
         }
         .banner-description-button {
           @extend .button-filled;
@@ -161,6 +162,9 @@
         .banner-description {
           margin: 0;
           background-image:none;
+          .banner-description-paragraph {
+            margin: 1rem 0;
+          }
         }
         .banner-img {
           display: none;

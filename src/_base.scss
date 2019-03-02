@@ -360,20 +360,6 @@ body {
     align-self: flex-end;
     display: flex;
     height: 100%;
-    .login {
-      @extend .button-outlined,.text-nav;
-      border:none;
-      border-left: 2px solid $COLOR-CBRAIN;
-      padding: $PADDING + rem $PADDING * 5 + rem;
-      color:rgba(255,255,255,0.6);
-      font-weight: 300;
-      &:before {
-        background-color: $COLOR-CBRAIN;
-      }
-      &:hover {
-        color: $COLOR-WHITE
-      }
-    }
     .links {
       display:flex;
       .link {
@@ -385,11 +371,22 @@ body {
           color: $COLOR_WHITE;
           transition:  all 0.2s ease-in-out;
         }
-        &[data-page="login"]{
-          display: none;
+      }
+      .login {
+        @extend .button-outlined,.text-nav;
+        border:none;
+        padding: 0rem $PADDING * 3.5 + rem;
+        color:rgba(255,255,255,0.6);
+        font-weight: 300;
+        box-shadow: none;
+        &:before {
+          background-color: $COLOR-CBRAIN;
+        }
+        &:hover {
+          color: $COLOR-WHITE
         }
       }
-     }
+    }
     .burger {
       width: fit-content;
       display: none;
@@ -407,9 +404,6 @@ body {
       flex-wrap:wrap;
       .links {
         display:none;
-      }
-      .login {
-        display: none;
       }
       .burger {
         display: block;
@@ -442,8 +436,11 @@ body {
            &:hover {
              background-color: $COLOR-CBRAIN;
            }
-           &[data-page="login"]{
-             display: block;
+         }
+         .login {
+           padding: $PADDING * 2 + rem;
+           &:before {
+             background-color: transparent;
            }
          }
        }

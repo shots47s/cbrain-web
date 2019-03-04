@@ -367,7 +367,7 @@ body {
         text-decoration: none;
         padding: $PADDING * 2 + rem;
         border-bottom: 2px solid transparent;
-        &:hover, &[data-selected] {
+        &:hover, &[data-active] {
           color: $COLOR_WHITE;
           transition:  all 0.2s ease-in-out;
         }

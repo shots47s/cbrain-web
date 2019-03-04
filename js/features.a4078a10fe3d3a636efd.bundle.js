@@ -36,14 +36,14 @@
 /******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 	// Promise = chunk loading, 0 = chunk loaded
 /******/ 	var installedChunks = {
-/******/ 		3: 0
+/******/ 		1: 0
 /******/ 	};
 /******/
 /******/
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"4":"lottie"}[chunkId]||chunkId) + "." + "b5d6f5bf70e4ddf01de3" + ".bundle.js"
+/******/ 		return __webpack_require__.p + "" + ({"4":"lottie"}[chunkId]||chunkId) + "." + "a4078a10fe3d3a636efd" + ".bundle.js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -193,7 +193,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 17);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -877,13 +877,22 @@ var isElementInView = function isElementInView(el) {
 /* 5 */,
 /* 6 */,
 /* 7 */,
-/* 8 */
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9);
-/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _features_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(18);
+/* harmony import */ var _features_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_features_scss__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _animations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
 /* harmony import */ var _partials_partials__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
 /* harmony import */ var _partials_partials__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_partials_partials__WEBPACK_IMPORTED_MODULE_2__);
@@ -902,11 +911,11 @@ window.addEventListener("resize", function () {
 });
 
 /***/ }),
-/* 9 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(10);
+var content = __webpack_require__(19);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -927,7 +936,7 @@ if(content.locals) module.exports = content.locals;
 if(false) {}
 
 /***/ }),
-/* 10 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -938,4 +947,4 @@ exports.push([module.i, "", ""]);
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=index.b5d6f5bf70e4ddf01de3.bundle.js.map
+//# sourceMappingURL=features.a4078a10fe3d3a636efd.bundle.js.map

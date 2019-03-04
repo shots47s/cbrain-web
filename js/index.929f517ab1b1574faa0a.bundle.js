@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"4":"lottie"}[chunkId]||chunkId) + "." + "be287570ef9074b53b16" + ".bundle.js"
+/******/ 		return __webpack_require__.p + "" + ({"4":"lottie"}[chunkId]||chunkId) + "." + "929f517ab1b1574faa0a" + ".bundle.js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -796,11 +796,12 @@ module.exports = function (css) {
  ============================================================
 */
 var setSelectedLink = function setSelectedLink() {
-  var selection = window.location.pathname.split("/")[1].split(".")[0];
+  var path = window.location.pathname.split("/");
+  var selection = path[path.length - 1].split(".")[0];
   var selected_link = document.querySelector("[data-page='".concat(selection, "']"));
 
   if (selected_link) {
-    selected_link.dataset.selected = true;
+    selected_link.dataset.active = true;
   }
 };
 
@@ -938,4 +939,4 @@ exports.push([module.i, "", ""]);
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=index.be287570ef9074b53b16.bundle.js.map
+//# sourceMappingURL=index.929f517ab1b1574faa0a.bundle.js.map

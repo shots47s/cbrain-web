@@ -787,7 +787,11 @@ var toggleModal = function toggleModal(e) {
   });
 };
 
-var loadEmployee = Object.entries(_team_data_json__WEBPACK_IMPORTED_MODULE_2__).map(function (v, i) {
+var loadEmployee = Object.entries(_team_data_json__WEBPACK_IMPORTED_MODULE_2__).map(function (_ref3, i) {
+  var _ref4 = _slicedToArray(_ref3, 2),
+      k = _ref4[0],
+      v = _ref4[1];
+
   var grid_el = document.querySelector(".team-grid");
   var affiliate_grid_el = document.querySelector(".affiliate-grid");
   var employee = document.querySelector(".team-employee");
@@ -847,4 +851,4 @@ exports.push([module.i, "", ""]);
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=about.6c3f80fc21a3563711e8.bundle.js.map
+//# sourceMappingURL=about.b5d6f5bf70e4ddf01de3.bundle.js.map

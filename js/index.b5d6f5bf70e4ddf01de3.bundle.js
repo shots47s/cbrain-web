@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"4":"lottie"}[chunkId]||chunkId) + "." + "6c3f80fc21a3563711e8" + ".bundle.js"
+/******/ 		return __webpack_require__.p + "" + ({"4":"lottie"}[chunkId]||chunkId) + "." + "b5d6f5bf70e4ddf01de3" + ".bundle.js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -818,8 +818,6 @@ window.addEventListener("load", setSelectedLink);
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return handleAnimations; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return loadAnimations; });
 /*
 =============================================================
  | ANIMATIONS
@@ -830,54 +828,50 @@ var isElementInView = function isElementInView(el) {
   return boundsEl.top >= 0 && boundsEl.left >= 0 && boundsEl.bottom <= (window.innerHeight || document.documentElement.clientHeight) && boundsEl.right <= (window.innerWidth || document.documentElement.clientHeight);
 };
 
-var startAnimation = function startAnimation(el) {
-  el.dataset.animate = "true";
-  __webpack_require__.e(/* import() | lottie */ 4).then(__webpack_require__.t.bind(null, 6, 7)).then(function (lottie) {
-    return lottie.play(el.id);
-  }).catch(function (err) {
-    return err;
-  });
-};
+/* harmony default export */ __webpack_exports__["a"] = (function (elements) {
+  __webpack_require__.e(/* import() | lottie */ 4).then(__webpack_require__.t.bind(null, 7, 7)).then(function (lottieData) {
+    var lottie = lottieData.default;
 
-var stopAnimation = function stopAnimation(el) {
-  el.dataset.animate = "false";
-  __webpack_require__.e(/* import() | lottie */ 4).then(__webpack_require__.t.bind(null, 6, 7)).then(function (lottie) {
-    return lottie.stop(el.id);
-  }).catch(function (err) {
-    return err;
-  });
-};
+    var startAnimation = function startAnimation(el) {
+      el.dataset.animate = "true";
+      return lottie.play(el.id);
+    };
 
-var handleAnimations = function handleAnimations(elements) {
-  return elements.map(function (el) {
-    var is_animate = JSON.parse(el.dataset.animate);
-    var is_visible = isElementInView(el);
+    var stopAnimation = function stopAnimation(el) {
+      el.dataset.animate = "false";
+      return lottie.stop(el.id);
+    };
 
-    if (is_animate === is_visible) {
-      return null;
-    }
-
-    return is_visible ? startAnimation(el) : stopAnimation(el);
-  });
-};
-var loadAnimations = function loadAnimations(elements) {
-  var loop = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-  __webpack_require__.e(/* import() | lottie */ 4).then(__webpack_require__.t.bind(null, 6, 7)).then(function (lottie) {
-    return elements.map(function (el) {
-      return lottie.loadAnimation({
+    var loadAnimation = function loadAnimation(el) {
+      lottie.loadAnimation({
         container: el,
         renderer: "svg",
         path: "./assets/animations/".concat(el.id, ".json"),
         autoplay: false,
-        loop: loop,
         name: "".concat(el.id)
       });
+      el.dataset.loaded = "true";
+      return startAnimation(el);
+    };
+
+    return elements.map(function (el) {
+      var is_animate = JSON.parse(el.dataset.animate);
+      var is_visible = isElementInView(el);
+
+      if (is_visible === is_animate) {
+        return null;
+      }
+
+      if (is_visible) {
+        return el.dataset.loaded !== "true" ? loadAnimation(el) : startAnimation(el);
+      }
+
+      return stopAnimation(el);
     });
   }).catch(function (err) {
     return err;
   });
-  handleAnimations(elements);
-};
+});
 
 /***/ }),
 /* 5 */,
@@ -898,13 +892,13 @@ __webpack_require__.r(__webpack_exports__);
 
 var animations = Array.from(document.querySelectorAll(".animation"));
 window.addEventListener("load", function () {
-  return Object(_animations__WEBPACK_IMPORTED_MODULE_1__[/* loadAnimations */ "b"])(animations);
+  return Object(_animations__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])(animations);
 });
 window.addEventListener("scroll", function () {
-  return Object(_animations__WEBPACK_IMPORTED_MODULE_1__[/* handleAnimations */ "a"])(animations);
+  return Object(_animations__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])(animations);
 });
 window.addEventListener("resize", function () {
-  return Object(_animations__WEBPACK_IMPORTED_MODULE_1__[/* handleAnimations */ "a"])(animations);
+  return Object(_animations__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])(animations);
 });
 
 /***/ }),
@@ -944,4 +938,4 @@ exports.push([module.i, "", ""]);
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=index.6c3f80fc21a3563711e8.bundle.js.map
+//# sourceMappingURL=index.b5d6f5bf70e4ddf01de3.bundle.js.map

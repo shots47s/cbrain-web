@@ -14,6 +14,7 @@ const loadEmployeeDetails = (id, modal, employee_el) => {
       link_el.setAttribute("class", "employee-link");
       link_el.textContent = `${k}`;
       link_el.href = `${v}`;
+      link_el.target = "_blank";
       return links_el.appendChild(link_el);
     });
   }

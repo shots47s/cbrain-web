@@ -67,7 +67,7 @@
           text-decoration: none;
           .resource-card-img {
             @extend .card-img;
-            padding: 0;
+            display: block;
             width: 100%;
             img {
               width: 100%;
@@ -128,8 +128,8 @@
           flex: 1 1 100%;
           padding: 1rem;
           .resource-card-img {
-            width: 50%;
-            height: 150px;
+            width: 100%;
+            flex: unset;
           }
           .resource-card-text {
             padding-top: 1rem;

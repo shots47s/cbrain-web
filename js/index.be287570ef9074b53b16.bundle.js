@@ -1,6 +1,50 @@
 /******/ (function(modules) { // webpackBootstrap
+/******/ 	// install a JSONP callback for chunk loading
+/******/ 	function webpackJsonpCallback(data) {
+/******/ 		var chunkIds = data[0];
+/******/ 		var moreModules = data[1];
+/******/
+/******/
+/******/ 		// add "moreModules" to the modules object,
+/******/ 		// then flag all "chunkIds" as loaded and fire callback
+/******/ 		var moduleId, chunkId, i = 0, resolves = [];
+/******/ 		for(;i < chunkIds.length; i++) {
+/******/ 			chunkId = chunkIds[i];
+/******/ 			if(installedChunks[chunkId]) {
+/******/ 				resolves.push(installedChunks[chunkId][0]);
+/******/ 			}
+/******/ 			installedChunks[chunkId] = 0;
+/******/ 		}
+/******/ 		for(moduleId in moreModules) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if(parentJsonpFunction) parentJsonpFunction(data);
+/******/
+/******/ 		while(resolves.length) {
+/******/ 			resolves.shift()();
+/******/ 		}
+/******/
+/******/ 	};
+/******/
+/******/
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
+/******/
+/******/ 	// object to store loaded and loading chunks
+/******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 	// Promise = chunk loading, 0 = chunk loaded
+/******/ 	var installedChunks = {
+/******/ 		3: 0
+/******/ 	};
+/******/
+/******/
+/******/
+/******/ 	// script path function
+/******/ 	function jsonpScriptSrc(chunkId) {
+/******/ 		return __webpack_require__.p + "" + ({"4":"lottie"}[chunkId]||chunkId) + "." + "be287570ef9074b53b16" + ".bundle.js"
+/******/ 	}
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
@@ -26,6 +70,64 @@
 /******/ 		return module.exports;
 /******/ 	}
 /******/
+/******/ 	// This file contains only the entry chunk.
+/******/ 	// The chunk loading function for additional chunks
+/******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
+/******/ 		var promises = [];
+/******/
+/******/
+/******/ 		// JSONP chunk loading for javascript
+/******/
+/******/ 		var installedChunkData = installedChunks[chunkId];
+/******/ 		if(installedChunkData !== 0) { // 0 means "already installed".
+/******/
+/******/ 			// a Promise means "currently loading".
+/******/ 			if(installedChunkData) {
+/******/ 				promises.push(installedChunkData[2]);
+/******/ 			} else {
+/******/ 				// setup Promise in chunk cache
+/******/ 				var promise = new Promise(function(resolve, reject) {
+/******/ 					installedChunkData = installedChunks[chunkId] = [resolve, reject];
+/******/ 				});
+/******/ 				promises.push(installedChunkData[2] = promise);
+/******/
+/******/ 				// start chunk loading
+/******/ 				var script = document.createElement('script');
+/******/ 				var onScriptComplete;
+/******/
+/******/ 				script.charset = 'utf-8';
+/******/ 				script.timeout = 120;
+/******/ 				if (__webpack_require__.nc) {
+/******/ 					script.setAttribute("nonce", __webpack_require__.nc);
+/******/ 				}
+/******/ 				script.src = jsonpScriptSrc(chunkId);
+/******/
+/******/ 				onScriptComplete = function (event) {
+/******/ 					// avoid mem leaks in IE.
+/******/ 					script.onerror = script.onload = null;
+/******/ 					clearTimeout(timeout);
+/******/ 					var chunk = installedChunks[chunkId];
+/******/ 					if(chunk !== 0) {
+/******/ 						if(chunk) {
+/******/ 							var errorType = event && (event.type === 'load' ? 'missing' : event.type);
+/******/ 							var realSrc = event && event.target && event.target.src;
+/******/ 							var error = new Error('Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')');
+/******/ 							error.type = errorType;
+/******/ 							error.request = realSrc;
+/******/ 							chunk[1](error);
+/******/ 						}
+/******/ 						installedChunks[chunkId] = undefined;
+/******/ 					}
+/******/ 				};
+/******/ 				var timeout = setTimeout(function(){
+/******/ 					onScriptComplete({ type: 'timeout', target: script });
+/******/ 				}, 120000);
+/******/ 				script.onerror = script.onload = onScriptComplete;
+/******/ 				document.head.appendChild(script);
+/******/ 			}
+/******/ 		}
+/******/ 		return Promise.all(promises);
+/******/ 	};
 /******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
@@ -79,9 +181,19 @@
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
 /******/
+/******/ 	// on error function for async loading
+/******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
+/******/
+/******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
+/******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
+/******/ 	jsonpArray.push = webpackJsonpCallback;
+/******/ 	jsonpArray = jsonpArray.slice();
+/******/ 	for(var i = 0; i < jsonpArray.length; i++) webpackJsonpCallback(jsonpArray[i]);
+/******/ 	var parentJsonpFunction = oldJsonpFunction;
+/******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 14);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -702,113 +814,99 @@ burger.addEventListener("click", toggleNavigation);
 window.addEventListener("load", setSelectedLink);
 
 /***/ }),
-/* 4 */,
-/* 5 */,
-/* 6 */
-/***/ (function(module) {
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-module.exports = {"0":{"icon":"mcin.png","title":"McGill Centre for Integrative Neuroscience","description":"A component of the Ludmer Centre for Neuroinformatics and Mental Health, the MCIN conducts computationally-intensive brain research using innovative mathematical and statistical approaches to integrate clinical, psychological or neuroimaging phenotypes with genotypic information.  MCIN provides state of the art high performance computing technologies, research infrastructure, and training for researching questions in neurology, psychiatry, and developmental neurobiology.","link":"http://www.mcin.ca"},"1":{"icon":"conp.png","title":"Canadian Open Neuroinformatics Platform","description":"The Canadian Open Neuroscience Platform (CONP) aims to bring together many of the country’s leading scientists in basic and clinical neuroscience to form an interactive network of collaborations in brain research, interdisciplinary student training, international partnerships, clinical translation and open publishing. The platform will provide a unified interface to the research community and will propel Canadian neuroscience research into a new era of open neuroscience research with the sharing of both data and methods,  the creation of large-scale databases, the development of standards for sharing, the facilitation of advanced analytic strategies, the open dissemination to the global community of both neuroscience data and methods, and the establishment of training programs for the next generation of computational neuroscience researchers.","link":"http://www.conp.ca"},"2":{"icon":"hbhl.jpg","title":"Healthy Brains for Healthy Lives","description":"The Healthy Brains for Healthy Lives (HBHL) initiative is a high profile, high priority multidisciplinary and cross-sectoral initiative located at McGill University made possible with support from the Canada First Research Excellence Fund (CFREF), Quebec’s Ministère de l'Économie, de la Science et de l'Innovation (MESI), and the Fonds de recherche du Quebec (FRQS, FRQSC and FRQNT). HBHL builds on McGill’s scientific excellence and global leadership in areas of neuroscience that hold the greatest promise for delivering implementable, clinically effective outcomes in brain and mental health. It aims to transform many brain disorders from terminal or life-long afflictions to treatable, even curable, conditions.","link":"https://www.mcgill.ca/hbhl"},"3":{"icon":"compute-canada.png","title":"Compute Canada","description":"Compute Canada, in partnership with regional organizations ACENET, Calcul Québec, Compute Ontario and WestGrid, leads the acceleration of research and innovation by deploying state-of-the-art advanced research computing (ARC) systems, storage and software solutions. Together we provide essential ARC services and infrastructure for Canadian researchers and their collaborators in all academic and industrial sectors. Our world-class team of more than 200 experts employed by 37 partner universities and research institutions across the country provide direct support to research teams. Compute Canada is a proud ambassador for Canadian excellence in advanced research computing nationally and internationally.","link":"http://www.computecanada.ca/home"},"4":{"icon":"loris.png","title":"LORIS","description":"The Longitudinal Online Research and Imaging System (LORIS) is a web-based data and project management software for neuroimaging research studies. It is an open source framework for storing and processing behavioural, clinical, neuroimaging and genetic data. LORIS also makes it easy to manage large datasets acquired over time in a longitudinal study, or at different locations in a large multi-site study.","link":"http://www.loris.ca"},"5":{"icon":"boutiques.png","title":"Boutiques","description":"Boutiques is a tool to automatically publish, integrate, and execute applications across computational platforms. Boutiques applications are summarized in a simple yet rich JSON description, and enable the simulation, validation, evaluation, and application-specific monitoring of command-line tools.","link":"http://www.boutiques.github.io"},"6":{"icon":"carmin.png","title":"CARMIN","description":"CARMIN is a common web RESTful API for pipeline execution on remote computational resources.  It presents a common means for software to connect to backend services for launching, tracking, and collecting data from pipelines that need large scale resources to be performed.","link":"https://github.com/CARMIN-org/CARMIN-API"},"7":{"icon":"clowdr.png","title":"Clowdr","description":"Clowdr can be thought of as a cloud execution utility for Boutiques, the JSON-based descriptive command-line framework. As Boutiques and the Boutiques tools allow the encapsulation, validation, evaluation, and deployment of command-line routines, Clowdr inherits and extends this functionality to remote datasets and computational resources, while collecting detailed provenance information across executions.","link":"https://github.com/clowdr/clowdr"}};
+"use strict";
+/*
+=============================================================
+ | ANIMATIONS
+=============================================================
+*/
+var isElementInView = function isElementInView(el) {
+  var boundsEl = el.getBoundingClientRect();
+  return boundsEl.top >= 0 && boundsEl.left >= 0 && boundsEl.bottom <= (window.innerHeight || document.documentElement.clientHeight) && boundsEl.right <= (window.innerWidth || document.documentElement.clientHeight);
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (function (elements) {
+  __webpack_require__.e(/* import() | lottie */ 4).then(__webpack_require__.t.bind(null, 7, 7)).then(function (lottieData) {
+    var lottie = lottieData.default;
+
+    var startAnimation = function startAnimation(el) {
+      el.dataset.animate = "true";
+      return lottie.play(el.id);
+    };
+
+    var stopAnimation = function stopAnimation(el) {
+      el.dataset.animate = "false";
+      return lottie.stop(el.id);
+    };
+
+    var loadAnimation = function loadAnimation(el) {
+      lottie.loadAnimation({
+        container: el,
+        renderer: "svg",
+        path: "./assets/animations/".concat(el.id, ".json"),
+        autoplay: false,
+        name: "".concat(el.id)
+      });
+      el.dataset.loaded = "true";
+      return startAnimation(el);
+    };
+
+    return elements.map(function (el) {
+      var is_animate = JSON.parse(el.dataset.animate);
+      var is_visible = isElementInView(el);
+
+      if (is_visible === is_animate) {
+        return null;
+      }
+
+      if (is_visible) {
+        return el.dataset.loaded !== "true" ? loadAnimation(el) : startAnimation(el);
+      }
+
+      return stopAnimation(el);
+    });
+  }).catch(function (err) {
+    return err;
+  });
+});
 
 /***/ }),
+/* 5 */,
+/* 6 */,
 /* 7 */,
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _projects_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(15);
-/* harmony import */ var _projects_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_projects_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _partials_partials__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
-/* harmony import */ var _partials_partials__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_partials_partials__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _projects_data_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
-var _projects_data_json__WEBPACK_IMPORTED_MODULE_2___namespace = /*#__PURE__*/__webpack_require__.t(6, 1);
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9);
+/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _animations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _partials_partials__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
+/* harmony import */ var _partials_partials__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_partials_partials__WEBPACK_IMPORTED_MODULE_2__);
 
 
 
-
-
-var loadContent = function loadContent() {
-  Array.from(document.querySelectorAll(".project")).map(function (_) {
-    var content_el = _.querySelector(".project-content");
-
-    var description_el = _.querySelector(".project-content-text");
-
-    var description_height = description_el.getBoundingClientRect().height;
-    content_el.style.height = "".concat(0, "px");
-    description_el.style.marginTop = "".concat(0 - description_height, "px");
-
-    if (_.dataset.selected === "true") {
-      content_el.style.height = "".concat(description_height, "px");
-      description_el.style.marginTop = "".concat(0, "px");
-    }
-
-    return null;
-  });
-};
-
-var toggleProjectContent = function toggleProjectContent(e) {
-  var parent_el = e.currentTarget.parentElement;
-
-  if (!parent_el.dataset.selected || parent_el.dataset.selected === "false") {
-    Array.from(document.querySelectorAll("[data-selected = 'true']")).map(function (_) {
-      _.dataset.selected = "false";
-      return null;
-    });
-    parent_el.dataset.selected = "true";
-  } else {
-    parent_el.dataset.selected = "false";
-  }
-
-  loadContent();
-};
-
-var loadData = function loadData() {
-  var projects_section = document.querySelector(".projects-section");
-  var project = document.querySelector(".project");
-  Object.entries(_projects_data_json__WEBPACK_IMPORTED_MODULE_2__).map(function (_ref, i) {
-    var _ref2 = _slicedToArray(_ref, 2),
-        k = _ref2[0],
-        v = _ref2[1];
-
-    if (i !== 0) {
-      project = project.cloneNode(true);
-    }
-
-    project.querySelector(".project-card-title").textContent = "".concat(v.title);
-    project.querySelector(".project-card-img").src = "./assets/icons/icon-".concat(v.icon);
-    project.querySelector(".project-content-title").textContent = "".concat(v.title);
-    project.querySelector(".project-content-link").href = "".concat(v.link);
-    project.querySelector(".project-content-description").textContent = "".concat(v.description);
-    project.querySelector(".project-card").addEventListener("click", toggleProjectContent);
-    project.dataset.selected = "false";
-    return projects_section.appendChild(project);
-  });
-  loadContent();
-};
-
-window.addEventListener("load", loadData);
-window.addEventListener("load", loadContent);
-window.addEventListener("resize", loadContent);
+var animations = Array.from(document.querySelectorAll(".animation"));
+window.addEventListener("load", function () {
+  return Object(_animations__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])(animations);
+});
+window.addEventListener("scroll", function () {
+  return Object(_animations__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])(animations);
+});
+window.addEventListener("resize", function () {
+  return Object(_animations__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])(animations);
+});
 
 /***/ }),
-/* 15 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(16);
+var content = __webpack_require__(10);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -829,7 +927,7 @@ if(content.locals) module.exports = content.locals;
 if(false) {}
 
 /***/ }),
-/* 16 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -840,4 +938,4 @@ exports.push([module.i, "", ""]);
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=projects.a4078a10fe3d3a636efd.bundle.js.map
+//# sourceMappingURL=index.be287570ef9074b53b16.bundle.js.map

@@ -252,8 +252,15 @@ $EMPLOYEE_IMG : 8;
             .employee-img-wrapper {
               width: 55%;
               .employee-img-border {
+
+
                 .employee-button {
-                  transform: translate(50%, 0)
+                  width: $CLOSE_ICON_WIDTH - 0.5 + rem;
+                  height: $CLOSE_ICON_WIDTH - 0.5 + rem;
+                  .employee-icon {
+                    width: 0.5rem;
+                    height: 0.5rem;
+                  }
                 }
               }
             }
@@ -271,16 +278,6 @@ $EMPLOYEE_IMG : 8;
         padding: 2rem;
         .team-employee {
           flex: 0 1 100%;
-          .employee-details {
-            pointer-events:none;
-            .employee-img-wrapper {
-              .employee-img-border {
-                .employee-button {
-                  transform: translate(50%, 0)
-                }
-              }
-            }
-          }
         }
       }
     }

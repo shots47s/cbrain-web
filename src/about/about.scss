@@ -123,8 +123,10 @@ $EMPLOYEE_IMG : 8;
     .team-heading {
       @extend .text-heading;
       text-align: center;
-      padding: 2rem 0;
       width: 100%;
+      background-color: $COLOR-BLACK-SQUEEZE;
+      padding: 6rem;
+      margin-bottom: 2rem;
       .team-description {
         @extend .text;
         padding: 1rem 0;
@@ -270,7 +272,7 @@ $EMPLOYEE_IMG : 8;
   @include breakpoint(mobile) {
     .about-team {
       .team-heading {
-        padding: 0;
+        padding: $PADDING  * 3 + rem 0;
       }
       .team-grid {
         padding: 2rem;

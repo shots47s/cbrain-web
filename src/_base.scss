@@ -399,6 +399,12 @@ body {
      }
   }
   @include breakpoint(tablet) {
+    .logo {
+      width:7rem;
+      .logo-img {
+        padding: $PADDING + rem;
+      }
+    }
     .bar {
       width:calc(100% - 10rem);
       flex-direction: column;

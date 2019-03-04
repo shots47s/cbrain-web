@@ -165,8 +165,9 @@ $PADDING: 3;
         .project-card {
           .project-card-text {
             height: 4rem;
-            margin-bottom: 2rem;
             .project-card-title {
+              font-size: 1rem;
+              line-height: 1.5rem;
             }
           }
         }
